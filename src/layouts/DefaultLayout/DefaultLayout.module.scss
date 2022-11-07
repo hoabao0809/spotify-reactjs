@@ -1,0 +1,20 @@
+:root {
+  --footer-height: 66px;
+}
+
+.wrapper {
+  max-height: calc(100vh - var(--footer-height));
+
+  .container {
+    height: 100%;
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--footer-height);
+  background-color: gray;
+}

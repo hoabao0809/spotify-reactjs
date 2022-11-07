@@ -1,0 +1,37 @@
+.wrapper {
+  height: 100%;
+  padding: 2rem;
+  padding-top: 2.5rem;
+  background-color: var(--background-press);
+  color: var(--text-base);
+
+  .logo {
+    max-width: 120px;
+
+    .logo-img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .sidebar-items {
+    padding-top: 2rem;
+  }
+}
+
+// MenuItem custom css
+.create-playlist,
+.liked-songs {
+  align-items: center;
+  padding: 6px;
+  border-radius: 2px;
+}
+
+.create-playlist {
+  background: var(--text-sidebar);
+  color: #000;
+}
+
+.liked-songs {
+  background: linear-gradient(135deg, #450af5, #c4efd9);
+}
