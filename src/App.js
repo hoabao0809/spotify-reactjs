@@ -21,11 +21,11 @@ function App() {
 
           return (
             <Route
-              exact={route.path === '/' ? true : false}
+              exact={route.exact}
               key={index}
               path={route.path}
               element={
-                <Layout>
+                <Layout path={route.path}>
                   <Page />
                 </Layout>
               }

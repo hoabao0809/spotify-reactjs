@@ -2,11 +2,13 @@
   height: 100%;
   padding: 2rem;
   padding-top: 2.5rem;
+  padding-left: 2.5rem;
   background-color: var(--background-press);
   color: var(--text-base);
 
   .logo {
-    max-width: 120px;
+    max-width: 130px;
+    cursor: pointer;
 
     .logo-img {
       width: 100%;

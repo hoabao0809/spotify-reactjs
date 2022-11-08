@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import styles from './Sidebar.module.scss';
@@ -18,9 +19,12 @@ import {
 const cx = classNames.bind(styles);
 
 function Sidebar() {
+  const { keyword } = useParams();
+  const paramSearch = keyword ? `/${keyword}` : '/browse';
+  const navigate = useNavigate();
   return (
     <aside className={cx('wrapper')}>
-      <div className={cx('logo')}>
+      <div className={cx('logo')} onClick={() => navigate('/')}>
         <img
           src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
           alt="spotify-logo"
@@ -38,7 +42,7 @@ function Sidebar() {
           />
           <MenuItem
             title="Search"
-            to={config.routes.search}
+            to={config.routes.search + paramSearch}
             icon={<SearchIcon />}
             activeIcon={<SearchActiveIcon />}
           />

@@ -46,16 +46,20 @@ html {
   font-size: 62.5%;
 }
 
-a[href] {
-  text-decoration: none;
-  color: var(--text-base);
-}
-
 body {
   font-family: 'CircularSp', sans-serif, var(--fallback-family-font);
   font-size: 1.6rem;
   text-rendering: optimizeLegibility;
   line-height: 1.6;
+  color: var(--text-base);
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  overflow-y: overlay;
+}
+
+a[href] {
+  text-decoration: none;
+  color: var(--text-base);
 }
 
 /* Fonts Embedded */
@@ -71,10 +75,31 @@ body {
   font-weight: 600;
 }
 
+html *::-webkit-scrollbar {
+  border-radius: 0px;
+  width: 12px;
+}
+
+html *::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  height: 27.521%;
+  background-color: hsla(0, 0%, 100%, 0.3);
+}
+
+html *::-webkit-scrollbar-thumb:hover {
+  background: hsla(0, 0%, 100%, 0.5);
+  transition: all 0.2s ease-in;
+}
+
+html *::-webkit-scrollbar-track {
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
 /* Resizable panes */
 .Resizer {
-  background: #000;
-  opacity: 0.2;
+  background: var(--background-press);
+  opacity: 1;
   z-index: 1;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -85,22 +110,15 @@ body {
 }
 
 .Resizer:hover {
-  -webkit-transition: all 2s ease;
-  transition: all 2s ease;
+  opacity: 0.7;
 }
 
 .Resizer.vertical {
-  width: 11px;
-  margin: 0 -5px;
-  border-left: 5px solid rgba(255, 255, 255, 0);
-  border-right: 5px solid rgba(255, 255, 255, 0);
+  border-left: 0.5px solid var(--background-press);
+  border-right: 0.5px solid var(--background-press);
   cursor: col-resize;
 }
 
-.Resizer.vertical:hover {
-  border-left: 5px solid rgba(0, 0, 0, 0.5);
-  border-right: 5px solid rgba(0, 0, 0, 0.5);
-}
 .Resizer.disabled {
   cursor: not-allowed;
 }

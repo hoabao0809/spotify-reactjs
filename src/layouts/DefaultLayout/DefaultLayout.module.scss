@@ -10,11 +10,17 @@
   }
 }
 
+.container {
+  position: relative;
+  background-color: var(--background-highlight);
+  overflow-y: overlay;
+}
+
 .footer {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   height: var(--footer-height);
-  background-color: gray;
+  background-color: var(--background-base);
 }
