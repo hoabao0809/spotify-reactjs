@@ -4,7 +4,9 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Header.module.scss';
 import history from 'history/browser';
+
 import { SearchBar, PlaylistBar } from './components';
+import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
 
@@ -41,20 +43,32 @@ function Header({ path, isLoggedIn = false }) {
 
         <div className={cx('path-render')}>
           {path === '/' ? <div></div> : <PathRenderComp />}
-          {/* <PathRenderComp /> */}
-          {/* <div className={cx('search-wrapper')}>
-            <FontAwesomeIcon className={cx('search-icon')} icon={faSearch} />
-            <input
-              type="text"
-              name="search"
-              className={cx('search-input')}
-              placeholder="What do you want to listen to?"
-            />
-          </div> */}
         </div>
 
         <div className={cx('header-buttons')}>
-          <h4>Right section</h4>
+          <div className={cx('btn-actions')}>
+            <Button
+              href="https://www.spotify.com/vn-vi/premium/?utm_source=app&utm_medium=desktop&utm_campaign=upgrade"
+              text
+            >
+              Premium
+            </Button>
+            <Button href="https://support.spotify.com/vn-vi/" text>
+              Support
+            </Button>
+            <Button href="https://www.spotify.com/vn-vi/download/windows/" text>
+              Download
+            </Button>
+          </div>
+
+          <div className={cx('btn-user')}>
+            <Button to="/search" text>
+              Sign up
+            </Button>
+            <Button to="" primary>
+              Log in
+            </Button>
+          </div>
         </div>
       </div>
     </div>

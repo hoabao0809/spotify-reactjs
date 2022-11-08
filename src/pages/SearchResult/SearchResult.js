@@ -10,48 +10,9 @@ function SearchResult() {
 
   // Thêm encodeURIComponent
 
-  return (
-    <div key={keyword} className={cx('wrapper')}>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-      <h1>{keyword}</h1>
-    </div>
-  );
+  return <div key={keyword} className={cx('wrapper')}>
+    <h1>{keyword}</h1>
+  </div>;
 }
 
 export default SearchResult;
