@@ -1,0 +1,25 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url('https://storage.googleapis.com/pr-newsroom-wp/1/2021/03/SPOTIFY_US_FOR-THE-RECORD_PR-ASSET_032521_V2_CF-01.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.bg-gradient {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}

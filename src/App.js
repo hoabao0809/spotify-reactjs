@@ -6,6 +6,7 @@ import { publicRoutes } from '~/routes';
 import { DefaultLayout } from '~/layouts';
 
 function App() {
+  // const accessToken = localStorage.getItem('accessToken')
   return (
     <Router>
       <Routes>
@@ -35,6 +36,7 @@ function App() {
       </Routes>
     </Router>
   );
+  // }
 }
 
 export default App;
