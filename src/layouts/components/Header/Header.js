@@ -30,6 +30,7 @@ function Header({ path, isLoggedIn = false }) {
             style={{
               cursor:
                 window.history?.state?.idx === 0 ? 'not-allowed' : 'pointer',
+              opacity: window.history?.state?.idx === 0 ? '.7' : '1',
             }}
           />
           <FontAwesomeIcon

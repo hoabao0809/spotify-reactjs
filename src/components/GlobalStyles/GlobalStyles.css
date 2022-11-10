@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
 :root {
+  --header-height: 64px;
   --fallback-family-font: 'Roboto', sans-serif;
   --nav-bar-with: 212px;
   --background-base: #121212;

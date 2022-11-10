@@ -1,11 +1,11 @@
 :root {
   --gap: 3rem;
-  --header-height: 64px;
 }
 
 .wrapper {
   position: sticky;
   top: 0;
+  z-index: 10;
 
   width: 100%;
   height: var(--header-height);
@@ -30,9 +30,12 @@
   gap: 1;
 
   .breadcrumb-btn {
+    padding: .3rem;
     height: 22px;
     opacity: 1;
     width: 22px;
+    border-radius: 50%;
+    color: var(--text-base);
   }
 }
 

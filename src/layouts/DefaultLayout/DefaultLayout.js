@@ -3,10 +3,8 @@ import SplitPane from 'react-split-pane';
 
 import classNames from 'classnames/bind';
 import styles from './DefaultLayout.module.scss';
+import { Header, Footer, Sidebar, MainView } from '~/layouts/components';
 
-import Header from '../components/Header/Header';
-import Sidebar from '~/layouts/components/Sidebar';
-import Footer from '../components/Footer/Footer';
 import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
@@ -36,8 +34,8 @@ function DefaultLayout({ path, children }) {
 
         {/*--------- Right window ------- */}
         <div className={cx('container')}>
-          <Header path={path} isLoggedIn />
-          <div>{children}</div>
+          <Header path={path} />
+          <MainView path={path}>{children}</MainView>
         </div>
       </SplitPane>
 
