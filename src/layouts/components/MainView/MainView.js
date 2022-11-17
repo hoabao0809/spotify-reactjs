@@ -8,12 +8,12 @@ function MainView({ path, children }) {
   return (
     <Fragment>
       {path === '/' ? (
-        <div className={cx('linear-gradient')}></div>
+        <div id='linear-gradient' className={cx('linear-gradient')} />
       ) : (
         <Fragment />
       )}
       <section className={cx('view-wrapper')}>
-        <h1>{children}</h1>
+        {children}
       </section>
     </Fragment>
   );

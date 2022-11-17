@@ -11,6 +11,7 @@ function Button({
   children,
   primary,
   text,
+  play,
   className,
   onClick,
   ...passProps
@@ -35,6 +36,7 @@ function Button({
     [className]: className,
     primary,
     text,
+    play
   });
 
   return (

@@ -8,6 +8,7 @@
   --background-base: #121212;
   --background-highlight: #1a1a1a;
   --background-press: #000;
+  --background-footer: #181818;
   --background-elevated-base: #242424;
   --background-elevated-highlight: #2a2a2a;
   --background-elevated-press: #000;
@@ -17,6 +18,7 @@
   --background-unsafe-for-small-text-base: #121212;
   --background-unsafe-for-small-text-highlight: #121212;
   --background-unsafe-for-small-text-press: #121212;
+  --background-noise: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1IiBkPSJNMCAwaDMwMHYzMDBIMHoiLz48L3N2Zz4=);
   --text-base: #fff;
   --text-sidebar: #b3b3b3;
   --text-subdued: #a7a7a7;

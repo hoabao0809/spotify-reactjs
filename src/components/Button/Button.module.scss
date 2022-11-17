@@ -1,6 +1,7 @@
 :root {
   --btn-font-size: 16px;
   --btn-background-highlight: #f6f6f6;
+  --btn-play-background: #1fdf64;
 }
 
 .wrapper {
@@ -40,4 +41,13 @@
     font-weight: 800;
     color: var(--text-base) !important;
   }
+}
+
+.play {
+  background-color: var(--btn-play-background);
+
+  color: var(#000000);
+  width: 48px;
+  height: 48px;
+  border: none;
 }

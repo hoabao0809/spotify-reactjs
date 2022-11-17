@@ -1,0 +1,14 @@
+.wrapper {
+  width: 100%;
+}
+
+.container {
+  width: 95%;
+  margin: auto;
+}
+
+.top-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}

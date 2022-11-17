@@ -18,6 +18,11 @@ function DefaultLayout({ path, children }) {
     if (!accessToken) {
       navigate('/login');
     }
+
+    if (Date.now() > JSON.parse(accessToken).expires_in) {
+      localStorage.removeItem('accessToken');
+      navigate('/login');
+    }
   }, [accessToken, navigate]);
 
   return (

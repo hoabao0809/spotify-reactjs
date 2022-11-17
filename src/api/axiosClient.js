@@ -10,7 +10,7 @@ axiosClient.interceptors.request.use(
 
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
-      let parsedToken = JSON.parse(accessToken);
+      let parsedToken = JSON.parse(accessToken).access_token;
       config.headers['Authorization'] = `Bearer ${parsedToken}`;
     }
 
@@ -28,7 +28,6 @@ axiosClient.interceptors.response.use(
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     if (response && response.data) {
-      console.log('data: ', response.data);
       return response.data;
     }
 

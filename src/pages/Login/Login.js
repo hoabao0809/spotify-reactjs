@@ -18,7 +18,6 @@ const SCOPE =
 const REDIRECT_URI = 'http://localhost:3000/login';
 const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const ACCESS_TOKEN = 'accessToken';
-
 const URL = `https://accounts.spotify.com/authorize?response_type=token&client_id=${CLIENT_ID}&scope=${SCOPE}&redirect_uri=${REDIRECT_URI}&show_dialog=true`;
 
 const getDataFromHash = (hash) => {
@@ -42,7 +41,13 @@ function Login() {
       const hash = window.location.hash;
       const data = getDataFromHash(hash);
 
-      localStorage.setItem(ACCESS_TOKEN, JSON.stringify(data.access_token));
+      localStorage.setItem(
+        ACCESS_TOKEN,
+        JSON.stringify({
+          expires_in: Date.now() + Number(data.expires_in) * 1000,
+          access_token: data.access_token,
+        })
+      );
       navigate('/');
     }
   }, [navigate]);
