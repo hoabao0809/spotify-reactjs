@@ -1,7 +1,6 @@
 :root {
   --btn-font-size: 16px;
   --btn-background-highlight: #f6f6f6;
-  --btn-play-background: #1fdf64;
 }
 
 .wrapper {
@@ -44,10 +43,14 @@
 }
 
 .play {
-  background-color: var(--btn-play-background);
+  background-color: var(--essential-positive);
 
   color: var(#000000);
   width: 48px;
   height: 48px;
   border: none;
+
+  &:hover {
+    background-color: var(--essential-bright-accent);
+  }
 }

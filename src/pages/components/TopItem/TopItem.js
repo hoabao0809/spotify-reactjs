@@ -1,10 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import styles from './TopItem.module.scss';
 import classNames from 'classnames/bind';
 import Button from '~/components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
-import { getAverageRGB } from '~/utils/getAverageRGB';
+import {getAverageRGB} from '~/utils';
 
 const cx = classNames.bind(styles);
 

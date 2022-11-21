@@ -18,7 +18,7 @@
     background-color: hsla(0, 0%, 100%, 0.2);
 
     .button {
-      display: block;
+      opacity: 1;
     }
   }
 }
@@ -46,15 +46,13 @@
 }
 
 .button {
-  display: none;
-
   font-size: 2rem;
   font-weight: 700;
   touch-action: manipulation;
-  transition-duration: 33ms;
-  transition-property: background-color, border-color, color, box-shadow, filter,
-    transform;
+  transition: all 0.3s ease;
+
   user-select: none;
   transform: translate3d(0px, 0px, 0px);
   min-inline-size: 0px;
+  opacity: 0;
 }

@@ -3,6 +3,7 @@
 
 :root {
   --header-height: 64px;
+  --footer-height: 90px;
   --fallback-family-font: 'Roboto', sans-serif;
   --nav-bar-with: 212px;
   --background-base: #121212;
@@ -37,6 +38,7 @@
   --decorative-base: #fff;
   --decorative-subdued: #292929;
   --border-radius: 4px;
+  --transition: all 0.3s ease;
 }
 
 * {
@@ -100,6 +102,11 @@ html *::-webkit-scrollbar-track {
 }
 
 /* Resizable panes */
+
+.Pane2 {
+  min-width: calc(100vw - 350px);
+}
+
 .Resizer {
   background: var(--background-press);
   opacity: 1;
@@ -127,4 +134,29 @@ html *::-webkit-scrollbar-track {
 }
 .Resizer.disabled:hover {
   border-color: transparent;
+}
+
+/* Hanlde DOM click event pop up Footer Image */
+#popup-container {
+  opacity: 0;
+  clip-path: 'polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)';
+  height: 0;
+  transition: var(--transition);
+}
+
+.popUpEle-show {
+  opacity: 1 !important;
+  height: auto !important;
+  clip-path: 'polygon(0 0, 100% 1%, 100% 100%, 0% 100%)' !important;
+  transition: var(--transition) !important;
+}
+
+#footer-image {
+  width: 56px;
+  transition: var(--transition);
+}
+
+.footerImg-hide {
+  width: 0 !important;
+  transition: var(--transition);
 }

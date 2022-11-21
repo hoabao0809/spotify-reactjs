@@ -23,14 +23,16 @@ function DefaultLayout({ path, children }) {
       localStorage.removeItem('accessToken');
       navigate('/login');
     }
+
+    return () => {};
   }, [accessToken, navigate]);
 
   return (
     <Fragment>
       <SplitPane
         split="vertical"
-        defaultSize={250}
-        minSize={200}
+        defaultSize={213}
+        minSize={100}
         maxSize={350}
         className={cx('wrapper')}
       >
@@ -43,7 +45,6 @@ function DefaultLayout({ path, children }) {
           <MainView path={path}>{children}</MainView>
         </div>
       </SplitPane>
-
       <div className={cx('footer')}>
         <Footer />
       </div>

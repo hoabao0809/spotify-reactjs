@@ -1,7 +1,7 @@
 // Reference: http://jsfiddle.net/xLF38/818/
 // https://coderwall.com/p/pa-2uw/using-external-images-with-canvas-getimagedata-and-todataurl
 
-export const getAverageRGB = (imgEl) => {
+const getAverageRGB = (imgEl) => {
   let blockSize = 5, // only visit every 5 pixels
     defaultRGB = { r: 0, g: 0, b: 0 }, // for non-supporting envs
     canvas = document.createElement('canvas'),
@@ -48,3 +48,5 @@ export const getAverageRGB = (imgEl) => {
 
   return rgb;
 };
+
+export default getAverageRGB;

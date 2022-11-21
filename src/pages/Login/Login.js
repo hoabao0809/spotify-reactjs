@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 const SCOPE =
-  'user-top-read user-follow-read playlist-read-private user-library-read';
+  'user-read-playback-state user-modify-playback-state user-read-currently-playing user-top-read user-follow-read playlist-read-private user-library-read';
 const REDIRECT_URI = 'http://localhost:3000/login';
 const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const ACCESS_TOKEN = 'accessToken';

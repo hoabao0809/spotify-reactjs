@@ -12,12 +12,5 @@ export const fetchTopUserItems = () => {
         dispatch(addItems(response));
       })
       .catch((err) => console.log(err));
-
-    // try {
-    //   const topUserItems = fetchData();
-    //   dispatch(addItems(topUserItems));
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 };
