@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,9 +9,26 @@ import { SearchBar, PlaylistBar } from './components/index';
 import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
+const $ = document.querySelector.bind(document);
 
 function Header({ path }) {
+  const headerRef = useRef();
   let PathRenderComp;
+
+  useEffect(() => {
+    const rightPaneEle = $('#rightPane');
+    rightPaneEle.addEventListener('scroll', () => {
+      if (rightPaneEle.scrollTop > 200) {
+        headerRef.current.classList.add('header-sticky');
+      } else {
+        headerRef.current.classList.remove('header-sticky');
+      }
+    });
+
+    return () => {
+      rightPaneEle.removeEventListener('scroll', () => {});
+    };
+  }, []);
 
   if (path.includes('/search')) {
     PathRenderComp = SearchBar;
@@ -22,7 +39,7 @@ function Header({ path }) {
   }
 
   return (
-    <div className={cx('wrapper')}>
+    <div id='header' ref={headerRef} className={cx('wrapper')} >
       <div className={cx('container')}>
         <div className={cx('breadcrumbs')}>
           <FontAwesomeIcon
@@ -50,26 +67,14 @@ function Header({ path }) {
 
         <div className={cx('header-buttons')}>
           <div className={cx('btn-actions')}>
-            <Button
-              href="https://www.spotify.com/vn-vi/premium/?utm_source=app&utm_medium=desktop&utm_campaign=upgrade"
-              text
-            >
-              Premium
-            </Button>
-            <Button href="https://support.spotify.com/vn-vi/" text>
-              Support
-            </Button>
-            <Button href="https://www.spotify.com/vn-vi/download/windows/" text>
-              Download
+            <Button href="https://github.com/hoabao0809/spotify-reactjs" text>
+              Source Code
             </Button>
           </div>
 
           <div className={cx('btn-user')}>
-            <Button to="/search" text>
-              Sign up
-            </Button>
             <Button to="" primary>
-              Log in
+              Hoa Dou
             </Button>
           </div>
         </div>

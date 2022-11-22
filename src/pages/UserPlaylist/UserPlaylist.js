@@ -1,19 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import { selectPlaylists } from '~/store/reducers/playlists';
 import { fetchPlaylist } from '~/store/actionsCreator/mainView';
-import { MainViewWrapper } from '~/pages/components';
+import { MainViewWrapper, Playlist } from '~/pages/components';
 import { getAverageRGB } from '~/utils';
 import Button from '~/components/Button';
 
 import styles from './UserPlaylist.module.scss';
-import { LikeFooterIcon, LikeFullBgIcon } from '~/components/Icons';
+import { LikeFullBgIcon } from '~/components/Icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis, faPlay } from '@fortawesome/free-solid-svg-icons';
-import { faClockFour } from '@fortawesome/free-regular-svg-icons';
-import MenuItem from '~/layouts/components/Sidebar/Menu/MenuItem';
 import Tippy from '@tippyjs/react';
 
 const cx = classNames.bind(styles);
@@ -24,6 +22,7 @@ function UserPlaylist() {
   const dispatch = useDispatch();
   const playlist = useSelector(selectPlaylists).playlist;
   const playlistName = useRef();
+  const [dominantColor, setDominantColor] = useState('transparent');
 
   useEffect(() => {
     dispatch(fetchPlaylist(idPlaylist));
@@ -37,6 +36,7 @@ function UserPlaylist() {
     const topContainerEle = $('#top-container');
 
     if (imgEle && playlist?.name) {
+      // Change title font size depending on title's length
       if (playlist?.name?.length < 40) {
         playlistName.current.style.fontSize = '96px';
         playlistName.current.style.lineHeight = '96px';
@@ -54,8 +54,9 @@ function UserPlaylist() {
         $('#linear-gradient').style.backgroundColor = bgColor;
         $('#linear-gradient').style.backgroundImage =
           'linear-gradient(rgba(0, 0, 0, 0.3) 0, var(--background-base) 100%), var(--background-noise)';
-        $('#linear-gradient').style.height = '80%';
+        $('#linear-gradient').style.height = '90%';
         topContainerEle.style.background = `rgb(${r},${g},${b}),0.28`;
+        setDominantColor(bgColor);
       };
     }
 
@@ -124,93 +125,7 @@ function UserPlaylist() {
         </div>
 
         <div className={cx('songs-section')}>
-          <table>
-            <thead>
-              <tr>
-                <th width="2%">#</th>
-                <th width="43%">TITLE</th>
-                <th width="30%">ALBUM</th>
-                <th width="15%">DATE ADDED</th>
-                <th width="4%"></th>
-                <th width="6%">
-                  <FontAwesomeIcon icon={faClockFour} />
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {playlist?.tracks?.items?.map((song, index) => {
-                return (
-                  <tr key={index} className={cx('song-row')}>
-                    {/* 1st column */}
-                    <td>{index + 1}</td>
-
-                    {/* 2nd column */}
-                    <td className={cx('detail-column')}>
-                      <div className={cx('songImg-container')}>
-                        <img
-                          className={cx('song-img')}
-                          src={song?.track?.album?.images[0]?.url}
-                          alt={song?.track?.name}
-                          loading="lazy"
-                        />
-                      </div>
-                      <div className={cx('songName-container')}>
-                        <MenuItem
-                          className={cx('song-name')}
-                          title={song?.track?.name}
-                          to="/"
-                        />
-                        <MenuItem
-                          className={cx('artist')}
-                          title={song?.track?.artists[0]?.name}
-                          to="/"
-                        />
-                      </div>
-                    </td>
-
-                    {/* 3th column */}
-                    <td>
-                      <MenuItem
-                        className={cx('album-name')}
-                        title={song?.track?.album?.name}
-                        to="/"
-                      />
-                    </td>
-
-                    {/* 4th column */}
-                    <td>{new Date(song?.added_at).toDateString()}</td>
-
-                    {/* 5th column */}
-                    <td>
-                      <Tippy content="Save to Your Library" delay={200}>
-                        <button className={cx('likeSong-btn')}>
-                          <LikeFooterIcon width="16px" height="16px" />
-                        </button>
-                      </Tippy>
-                    </td>
-
-                    {/* 6th column */}
-                    <td className={cx('duration')}>
-                      <div className={cx('duration-container')}>
-                        {(+song?.track?.duration_ms / 60000)
-                          .toFixed(2)
-                          .replace('.', ':')}
-
-                        <Tippy
-                          content={`More options for ${song?.track?.name}`}
-                          delay={200}
-                        >
-                          <button className={cx('song-option')}>
-                            <FontAwesomeIcon icon={faEllipsis} />
-                          </button>
-                        </Tippy>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <Playlist playlist={playlist} dominantColor={dominantColor} />
         </div>
 
         <div className={cx('footer')}></div>

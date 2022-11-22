@@ -160,3 +160,9 @@ html *::-webkit-scrollbar-track {
   width: 0 !important;
   transition: var(--transition);
 }
+
+/* Handle scroll header */
+.header-sticky {
+  background: var(--background-base);
+  transition: var(--transition);
+}

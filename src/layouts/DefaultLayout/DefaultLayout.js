@@ -40,7 +40,7 @@ function DefaultLayout({ path, children }) {
         <Sidebar />
 
         {/*--------- Right window ------- */}
-        <div className={cx('container')}>
+        <div id='rightPane' className={cx('container')}>
           <Header path={path} />
           <MainView path={path}>{children}</MainView>
         </div>

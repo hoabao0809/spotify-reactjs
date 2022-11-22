@@ -10,9 +10,7 @@
   width: 100%;
   height: var(--header-height);
   background-color: transparent;
-
-  // Set up when window scroll
-  // background-color: rgba(0, 0, 0, 0.5);
+  transition: var(--transition);
 }
 
 .container {
@@ -39,6 +37,7 @@
     width: 22px;
     border-radius: 50%;
     color: var(--text-base);
+    background: var(--background-base);
   }
 }
 
