@@ -5,17 +5,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Header.module.scss';
 import history from 'history/browser';
 
-import { SearchBar, PlaylistBar } from './components';
+import { SearchBar, PlaylistBar } from './components/index';
 import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
 
-function Header({ path, isLoggedIn = false }) {
+function Header({ path }) {
   let PathRenderComp;
 
   if (path.includes('/search')) {
     PathRenderComp = SearchBar;
-  } else if (path === '/collection/playlists') {
+  } else if (path.includes('/playlist')) {
+    PathRenderComp = PlaylistBar;
+  } else if (path.includes('/collection/playlists')) {
     PathRenderComp = PlaylistBar;
   }
 

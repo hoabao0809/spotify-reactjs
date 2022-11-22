@@ -3,7 +3,7 @@ const routes = {
   search: '/search',
   yourLibrary: '/collection/playlists',
 
-  createPlaylist: '/playlist',
+  userPlaylist: '/playlist',
   likedSongs: '/collection/tracks',
 };
 

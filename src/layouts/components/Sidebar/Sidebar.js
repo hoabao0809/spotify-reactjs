@@ -30,7 +30,7 @@ function Sidebar() {
 
   const { keyword } = useParams();
   const paramSearch = keyword ? `/${keyword}` : '/browse';
-  const playlists = useSelector(selectPlaylists);
+  const playlists = useSelector(selectPlaylists).playlists;
 
   useEffect(() => {
     dispatch(fetchPlaylists());
@@ -87,7 +87,7 @@ function Sidebar() {
           <Menu>
             <MenuItem
               title="Create Playlist"
-              to={config.routes.createPlaylist}
+              to={config.routes.likedSongs}
               icon={<CreatePlaylistIcon className={cx('create-playlist')} />}
               activeIcon={
                 <CreatePlaylistIcon className={cx('create-playlist')} />
@@ -108,7 +108,7 @@ function Sidebar() {
               <MenuItem
                 key={index}
                 title={playlist.name}
-                to={config.routes.likedSongs}
+                to={config.routes.userPlaylist + `/${playlist.id}`}
               />
             ))}
           </div>

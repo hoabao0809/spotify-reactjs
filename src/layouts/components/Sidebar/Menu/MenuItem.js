@@ -6,11 +6,19 @@ import styles from './Menu.module.scss';
 
 const cx = classNames.bind(styles);
 
-function MenuItem({ title, to, icon, activeIcon }) {
+function MenuItem({ title, to, icon, activeIcon, className }) {
   return (
     // NavLink sẽ cung cấp 1 callback có object trả về là nav, trong đó có isActive => từ đó tạo dynamic class để chỉnh active
     <NavLink
-      className={(nav) => cx('menu-item', { active: nav.isActive })}
+      className={(nav) =>
+        cx(
+          'menu-item',
+          { active: nav.isActive },
+          {
+            [className]: className,
+          }
+        )
+      }
       to={to}
     >
       {icon && activeIcon && (
@@ -29,6 +37,7 @@ MenuItem.propTypes = {
   to: PropTypes.string.isRequired,
   icon: PropTypes.node,
   activeIcon: PropTypes.node,
+  className: PropTypes.string,
 };
 
 export default MenuItem;

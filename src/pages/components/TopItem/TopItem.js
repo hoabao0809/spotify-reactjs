@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import Button from '~/components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
-import {getAverageRGB} from '~/utils';
+import { getAverageRGB } from '~/utils';
 
 const cx = classNames.bind(styles);
 

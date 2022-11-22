@@ -53,6 +53,8 @@ function Footer() {
 
   const artists = currentSong?.item?.artists;
   const preview_url = currentSong?.item?.preview_url;
+  const fallbackImg =
+    'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2';
 
   useEffect(() => {
     playerApi
@@ -77,7 +79,10 @@ function Footer() {
 
     popUpEle.classList.add('popUpEle-show');
     footerImg.classList.add('footerImg-hide');
-    popUpImg.setAttribute('src', currentSong?.item?.album?.images[0]?.url);
+    popUpImg.setAttribute(
+      'src',
+      currentSong?.item?.album?.images[0]?.url || fallbackImg
+    );
     footerAngleUp.style.display = 'none';
   };
 
@@ -162,7 +167,7 @@ function Footer() {
           <div id="footer-image" className={cx('image-container')}>
             <img
               className={cx('image')}
-              src={currentSong?.item?.album?.images[0]?.url}
+              src={currentSong?.item?.album?.images[0]?.url || fallbackImg}
               alt=""
             />
             <Tippy content="Expand" delay={200}>

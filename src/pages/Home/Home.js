@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import styles from './Home.module.scss';
-import TopItem from '~/pages/components/TopItem';
+import { TopItem, MainViewWrapper } from '~/pages/components';
 import Card from '~/components/Card';
+
 import { selectTopUserItems } from '~/store/reducers/personalization';
 import { fetchTopUserItems } from '~/store/actionsCreator/home';
 
@@ -24,44 +25,42 @@ function Home() {
   }, []);
 
   return (
-    <section className={cx('wrapper')}>
-      <div className={cx('container')}>
-        <div className={cx('greet')}>
-          <h4>Good evening</h4>
+    <MainViewWrapper className={cx('custom-wrapper')}>
+      <div className={cx('greet')}>
+        <h4>Good evening</h4>
+      </div>
+      <div className={cx('top-content')}>
+        {userTopItems.slice(0, 6)?.map((topItem, index) => (
+          <TopItem key={index} topItem={topItem} />
+        ))}
+      </div>
+
+      <div className={cx('category-wrapper')}>
+        <div className={cx('title')}>
+          <Link>
+            <h2>Title</h2>
+          </Link>
+          <Link>
+            <span>SEE ALL</span>
+          </Link>
         </div>
-        <div className={cx('top-content')}>
-          {userTopItems.slice(0, 6)?.map((topItem, index) => (
-            <TopItem key={index} topItem={topItem} />
+        <div className={cx('category-container')}>
+          {userTopItems.slice(0, 6)?.map((item, index) => (
+            <Card key={index} item={item} roundImg />
           ))}
         </div>
+      </div>
 
-        <div className={cx('category-wrapper')}>
-          <div className={cx('title')}>
-            <Link>
-              <h2>Title</h2>
-            </Link>
-            <Link>
-              <span>SEE ALL</span>
-            </Link>
-          </div>
-          <div className={cx('category-container')}>
-            {userTopItems.slice(0, 6)?.map((item, index) => (
-              <Card key={index} item={item} roundImg />
-            ))}
-          </div>
-        </div>
+      {/* List part */}
 
-        {/* List part */}
-
-        {/* list.map(item => {
+      {/* list.map(item => {
           h4. title
           seeAll
           <Card squareImg roundImg to /> 
         })
             * asda
            */}
-      </div>
-    </section>
+    </MainViewWrapper>
   );
 }
 

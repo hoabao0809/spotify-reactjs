@@ -162,6 +162,23 @@ export const LikeFooterIcon = ({
   </svg>
 );
 
+export const LikeFullBgIcon = ({
+  width = '16px',
+  height = '16px',
+  className,
+}) => (
+  <svg
+    role="img"
+    height={height}
+    width={width}
+    className={className}
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M8.667 1.912a6.257 6.257 0 00-7.462 7.677c.24.906.683 1.747 1.295 2.457l7.955 9.482a2.015 2.015 0 003.09 0l7.956-9.482a6.188 6.188 0 001.382-5.234l-.49.097.49-.099a6.303 6.303 0 00-5.162-4.98h-.002a6.24 6.24 0 00-5.295 1.65.623.623 0 01-.848 0 6.257 6.257 0 00-2.91-1.568z"></path>
+  </svg>
+);
+
 export const PictureInPictureIcon = ({
   width = '16px',
   height = '16px',
@@ -304,5 +321,23 @@ export const VolumeHighIcon = ({
   >
     <path d="M9.741.85a.75.75 0 01.375.65v13a.75.75 0 01-1.125.65l-6.925-4a3.642 3.642 0 01-1.33-4.967 3.639 3.639 0 011.33-1.332l6.925-4a.75.75 0 01.75 0zm-6.924 5.3a2.139 2.139 0 000 3.7l5.8 3.35V2.8l-5.8 3.35zm8.683 4.29V5.56a2.75 2.75 0 010 4.88z"></path>
     <path d="M11.5 13.614a5.752 5.752 0 000-11.228v1.55a4.252 4.252 0 010 8.127v1.55z"></path>
+  </svg>
+);
+
+export const MusicNoteIcon = ({
+  width = '48px',
+  height = '48px',
+  className,
+}) => (
+  <svg
+    role="img"
+    height={height}
+    width={width}
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    className={className}
+    fill="currentColor"
+  >
+    <path d="M17.318 1.975a3.329 3.329 0 114.707 4.707L8.451 20.256c-.49.49-1.082.867-1.735 1.103L2.34 22.94a1 1 0 01-1.28-1.28l1.581-4.376a4.726 4.726 0 011.103-1.735L17.318 1.975zm3.293 1.414a1.329 1.329 0 00-1.88 0L5.159 16.963c-.283.283-.5.624-.636 1l-.857 2.372 2.371-.857a2.726 2.726 0 001.001-.636L20.611 5.268a1.329 1.329 0 000-1.879z"></path>
   </svg>
 );

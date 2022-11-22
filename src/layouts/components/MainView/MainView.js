@@ -7,14 +7,12 @@ const cx = classNames.bind(styles);
 function MainView({ path, children }) {
   return (
     <Fragment>
-      {path === '/' ? (
-        <div id='linear-gradient' className={cx('linear-gradient')} />
+      {path === '/' || path.includes('/playlist') ? (
+        <div id="linear-gradient" className={cx('linear-gradient')} />
       ) : (
         <Fragment />
       )}
-      <section className={cx('view-wrapper')}>
-        {children}
-      </section>
+      <section className={cx('view-wrapper')}>{children}</section>
     </Fragment>
   );
 }

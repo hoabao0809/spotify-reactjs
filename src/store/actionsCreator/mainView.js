@@ -1,17 +1,16 @@
 import playlistsApi from '~/api/playlists';
 
-import { addPlaylists } from '~/store/reducers/playlists';
+import { addPlaylist } from '~/store/reducers/playlists';
 
-export const fetchPlaylists = () => {
+export const fetchPlaylist = (idPlaylist) => {
   return (dispatch) => {
     playlistsApi
-      .getUserPlaylists()
+      .getPlaylist(idPlaylist)
       .then((response) => {
         if (!response) {
           throw new Error('Could not fetch data');
         }
-
-        dispatch(addPlaylists(response.items));
+        dispatch(addPlaylist(response));
       })
       .catch((err) => console.log(err));
   };
