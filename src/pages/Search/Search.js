@@ -1,20 +1,22 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import styles from './Search.module.scss';
+import classNames from 'classnames/bind';
+import { MainViewWrapper } from '~/pages/components';
+import { SearchBrowse, SearchOutput } from './components/index';
 
-// import { useParams } from 'react-router-dom';
-// import styles from './Search.module.scss';
-// import classNames from 'classnames/bind';
+const cx = classNames.bind(styles);
 
-// import history from 'history/browser';
+function SearchResult() {
+  let { keyword } = useParams();
 
-// const cx = classNames.bind(styles);
-
-function Search() {
+  // Thêm encodeURIComponent
 
   return (
-    <div>
-      <h1>Search</h1>
-    </div>
+    <MainViewWrapper className={cx('custom-wrapper')}>
+      {keyword === 'browse' ? <SearchBrowse /> : <SearchOutput />}
+    </MainViewWrapper>
   );
 }
 
-export default Search;
+export default SearchResult;

@@ -54,8 +54,7 @@ function Footer() {
   });
   const [isMuted, setIsMuted] = useState(false);
 
-  const preview_url =
-    currentSong?.item?.preview_url || currentSong?.preview_url;
+  const preview_url = currentSong?.preview_url;
   const audioRef = useRef(
     new Audio(
       preview_url ||
@@ -64,7 +63,7 @@ function Footer() {
   );
   // Variables
   const previewDuration = formatTime(audioRef?.current?.duration);
-  const artists = currentSong?.item?.artists || currentSong?.artists;
+  const artists = currentSong?.artists;
 
   const fallbackImg =
     'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2';
@@ -80,7 +79,7 @@ function Footer() {
     footerImg.classList.add('footerImg-hide');
     popUpImg.setAttribute(
       'src',
-      currentSong?.item?.album?.images[0]?.url || fallbackImg
+      currentSong?.album?.images[0]?.url || fallbackImg
     );
     footerAngleUp.style.display = 'none';
   };
@@ -193,11 +192,7 @@ function Footer() {
           <div id="footer-image" className={cx('image-container')}>
             <img
               className={cx('image')}
-              src={
-                currentSong?.item?.album?.images[0]?.url ||
-                currentSong?.album?.images[0]?.url ||
-                fallbackImg
-              }
+              src={currentSong?.album?.images[0]?.url || fallbackImg}
               alt=""
             />
             <Tippy content="Expand" delay={200}>
@@ -211,9 +206,7 @@ function Footer() {
             </Tippy>
           </div>
           <div className={cx('song-info')}>
-            <Link className={cx('name')}>
-              {currentSong?.item?.name || currentSong?.name}
-            </Link>
+            <Link className={cx('name')}>{currentSong?.name}</Link>
 
             {artists?.map((artist, index) => (
               <Fragment key={index}>

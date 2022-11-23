@@ -6,10 +6,11 @@ const browseApi = {
     return axiosClient.get(uri);
   },
   getCategories: (countryCode, limit) => {
-    const uri = `browse/categories?country=${countryCode}&limit=${limit}`;
+    const uri = limit
+      ? `browse/categories?country=${countryCode}&limit=${limit}`
+      : `browse/categories?country=${countryCode}`;
     return axiosClient.get(uri);
   },
 };
 
 export default browseApi;
-

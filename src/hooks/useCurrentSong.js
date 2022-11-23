@@ -20,8 +20,7 @@ function useCurrentSong() {
           if (response.status === 204 || response.status > 400) {
             return false;
           }
-
-          dispatch(addCurrentPlayingSong(response));
+          dispatch(addCurrentPlayingSong(response.item));
           setCurrentPlayingSong(response);
         })
         .catch((error) => console.log(error));

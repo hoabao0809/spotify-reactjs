@@ -4,6 +4,7 @@ import {
   playlistsReducer,
   playerSliceReducer,
   isPlayingTrackSliceReducer,
+  categoriesReducer,
 } from './reducers/index';
 
 export const store = configureStore({
@@ -12,5 +13,6 @@ export const store = configureStore({
     playlists: playlistsReducer,
     player: playerSliceReducer,
     isPlayingTrack: isPlayingTrackSliceReducer,
+    categories: categoriesReducer,
   },
 });
