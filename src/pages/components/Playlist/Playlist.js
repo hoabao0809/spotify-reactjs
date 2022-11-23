@@ -6,14 +6,18 @@ import { faClockFour } from '@fortawesome/free-regular-svg-icons';
 import MenuItem from '~/layouts/components/Sidebar/Menu/MenuItem';
 import { LikeFooterIcon } from '~/components/Icons';
 import Tippy from '@tippyjs/react';
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
-import { memo, useEffect, useRef } from 'react';
+import { faEllipsis, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { memo, useEffect, useRef, useState } from 'react';
+import { addSong } from '~/store/actionsCreator/player';
+import { useDispatch } from 'react-redux';
 
 const cx = classNames.bind(styles);
 const $ = document.querySelector.bind(document);
 
 function Playlist({ playlist, dominantColor }) {
   const tableHeaderRef = useRef();
+  const dispatch = useDispatch();
+  const [playingIndex, setPlayingIndex] = useState(null);
 
   // Handle window scroll set sticky to table header
   useEffect(() => {
@@ -39,6 +43,11 @@ function Playlist({ playlist, dominantColor }) {
     };
   }, [dominantColor]);
 
+  const handleOnClickSong = (idSong, index) => {
+    setPlayingIndex(index);
+    dispatch(addSong(idSong));
+  };
+
   return (
     <table>
       <thead ref={tableHeaderRef} className={cx('table-head')}>
@@ -56,9 +65,48 @@ function Playlist({ playlist, dominantColor }) {
       <tbody>
         {playlist?.tracks?.items?.map((song, index) => {
           return (
-            <tr key={index} className={cx('song-row')}>
+            <tr key={index} className={cx('song-row')} tabindex="0">
               {/* 1st column */}
-              <td>{index + 1}</td>
+              <td>
+                <span className={cx('song-index')}>
+                  {playingIndex === index + 1 ? (
+                    <img
+                      style={{ width: '14px', height: '14px' }}
+                      src="https://open.spotifycdn.com/cdn/images/equaliser-animated-green.f93a2ef4.gif"
+                      alt=""
+                    />
+                  ) : (
+                    index + 1
+                  )}
+                </span>
+
+                {playingIndex === index + 1 ? (
+                  <Tippy content={'Pause'} delay={200}>
+                    <span
+                      className={cx('play-btn')}
+                      // onClick={() =>
+                      //   handleOnPauseSong(song?.track?.id, index + 1)
+                      // }
+                    >
+                      <FontAwesomeIcon icon={faPause} />
+                    </span>
+                  </Tippy>
+                ) : (
+                  <Tippy
+                    content={`Play ${song?.track?.name}. by ${song?.track?.artists[0]?.name}`}
+                    delay={200}
+                  >
+                    <span
+                      className={cx('play-btn')}
+                      onClick={() =>
+                        handleOnClickSong(song?.track?.id, index + 1)
+                      }
+                    >
+                      <FontAwesomeIcon icon={faPlay} />
+                    </span>
+                  </Tippy>
+                )}
+              </td>
 
               {/* 2nd column */}
               <td className={cx('detail-column')}>
@@ -113,7 +161,7 @@ function Playlist({ playlist, dominantColor }) {
                     .replace('.', ':')}
 
                   <Tippy
-                    content={`More options for ${song?.track?.name}`}
+                    content={`More options for ${song?.track?.name}. by ${song?.track?.artists[0]?.name}`}
                     delay={200}
                   >
                     <button className={cx('song-option')}>

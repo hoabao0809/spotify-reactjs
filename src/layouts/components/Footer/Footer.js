@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import {
@@ -15,7 +15,6 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
 import styles from './Footer.module.scss';
-import playerApi from '~/api/playerApi';
 import {
   LikeFooterIcon,
   PictureInPictureIcon,
@@ -29,6 +28,8 @@ import {
 } from '~/components/Icons';
 import { formatTime } from '~/utils';
 
+import { useCurrentSong } from '~/hooks';
+
 const $ = document.querySelector.bind(document);
 const cx = classNames.bind(styles);
 
@@ -38,9 +39,8 @@ function Footer() {
   const currentTime = useRef();
   const volumeBarRef = useRef();
 
-  const previewDuration = formatTime(audioRef?.current?.duration);
-
-  const [currentSong, setCurrentSong] = useState({});
+  // Local States
+  const currentSong = useCurrentSong();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentVolume, setCurrentVolume] = useState(() => {
     const volumeLocalStorage = localStorage.getItem('playback');
@@ -51,26 +51,15 @@ function Footer() {
   });
   const [isMuted, setIsMuted] = useState(false);
 
-  const artists = currentSong?.item?.artists;
-  const preview_url = currentSong?.item?.preview_url;
+  // Variables
+  const previewDuration = formatTime(audioRef?.current?.duration);
+  const artists = currentSong?.item?.artists || currentSong?.artists;
+  const preview_url =
+    currentSong?.item?.preview_url || currentSong?.preview_url;
   const fallbackImg =
     'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2';
 
-  useEffect(() => {
-    playerApi
-      .getCurrentPlayingTrack()
-      .then((response) => {
-        if (response.status === 204 || response.status > 400) {
-          return false;
-        }
-        setCurrentSong(response);
-        audioRef.current.crossOrigin = 'anonymous';
-      })
-      .catch((error) => console.log(error));
-
-    return () => {};
-  }, []);
-
+    // Functions
   const handleOnClickArrowUp = () => {
     const popUpEle = $('#popup-container');
     const popUpImg = $('#popup-songImage');
@@ -167,7 +156,11 @@ function Footer() {
           <div id="footer-image" className={cx('image-container')}>
             <img
               className={cx('image')}
-              src={currentSong?.item?.album?.images[0]?.url || fallbackImg}
+              src={
+                currentSong?.item?.album?.images[0]?.url ||
+                currentSong?.album?.images[0]?.url ||
+                fallbackImg
+              }
               alt=""
             />
             <Tippy content="Expand" delay={200}>
@@ -181,7 +174,9 @@ function Footer() {
             </Tippy>
           </div>
           <div className={cx('song-info')}>
-            <Link className={cx('name')}>{currentSong?.item?.name}</Link>
+            <Link className={cx('name')}>
+              {currentSong?.item?.name || currentSong?.name}
+            </Link>
 
             {artists?.map((artist, index) => (
               <Fragment key={index}>

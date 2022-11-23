@@ -48,6 +48,11 @@ tbody {
   transform: translateY(10px);
 }
 
+.play-btn {
+  color: #fff;
+  display: none;
+}
+
 .song-row {
   border-radius: var(--border-radius);
 
@@ -66,6 +71,31 @@ tbody {
     .likeSong-btn,
     .song-option {
       opacity: 1;
+    }
+
+    .song-index {
+      display: none;
+    }
+
+    .play-btn {
+      display: inline-block;
+    }
+  }
+
+  &:focus-within {
+    background-color: hsla(0, 0%, 100%, 0.3);
+
+    .likeSong-btn,
+    .song-option {
+      opacity: 1;
+    }
+
+    .song-index {
+      display: none;
+    }
+
+    .play-btn {
+      display: inline-block;
     }
   }
 }
