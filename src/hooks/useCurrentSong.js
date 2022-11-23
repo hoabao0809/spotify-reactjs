@@ -6,14 +6,11 @@ import {
   selectCurrentSong,
   addCurrentPlayingSong,
 } from '~/store/reducers/player';
-import { getCurrentPlayingTrack } from '~/store/actionsCreator/player';
 
 function useCurrentSong() {
   const dispatch = useDispatch();
   const currentSong = useSelector(selectCurrentSong);
   const [currentPlayingSong, setCurrentPlayingSong] = useState(null);
-
-  console.log(currentSong);
 
   useEffect(() => {
     if (Object.keys(currentSong).length === 0) {

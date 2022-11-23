@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import {
@@ -27,21 +27,24 @@ import {
   VolumeHighIcon,
 } from '~/components/Icons';
 import { formatTime } from '~/utils';
-
 import { useCurrentSong } from '~/hooks';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsPlayingTrack, setIsPlaying } from '~/store/reducers/player';
 
 const $ = document.querySelector.bind(document);
 const cx = classNames.bind(styles);
 
 function Footer() {
-  const audioRef = useRef();
   const progressBarRef = useRef();
   const currentTime = useRef();
   const volumeBarRef = useRef();
 
+  const dispatch = useDispatch();
+
   // Local States
   const currentSong = useCurrentSong();
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { isPlaying, idPlayingTrack } = useSelector(selectIsPlayingTrack);
+
   const [currentVolume, setCurrentVolume] = useState(() => {
     const volumeLocalStorage = localStorage.getItem('playback');
     if (volumeLocalStorage) {
@@ -51,15 +54,22 @@ function Footer() {
   });
   const [isMuted, setIsMuted] = useState(false);
 
+  const preview_url =
+    currentSong?.item?.preview_url || currentSong?.preview_url;
+  const audioRef = useRef(
+    new Audio(
+      preview_url ||
+        'https://c1-ex-swe.nixcdn.com/NhacCuaTui1010/ChungTaSauNay-TRI-6929586.mp3?st=cXI76wUdMSEV9Lyej4T9AA&e=1667613140&download=true'
+    )
+  );
   // Variables
   const previewDuration = formatTime(audioRef?.current?.duration);
   const artists = currentSong?.item?.artists || currentSong?.artists;
-  const preview_url =
-    currentSong?.item?.preview_url || currentSong?.preview_url;
+
   const fallbackImg =
     'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2';
 
-    // Functions
+  // Functions
   const handleOnClickArrowUp = () => {
     const popUpEle = $('#popup-container');
     const popUpImg = $('#popup-songImage');
@@ -77,20 +87,18 @@ function Footer() {
 
   const handleEventsSong = {
     handleMusic(_isPlaying) {
-      const audio = audioRef?.current;
-      if (!_isPlaying) {
-        audio.play();
+      if (_isPlaying) {
+        dispatch(
+          setIsPlaying({ isPlaying: true, idPlayingTrack: currentSong?.id })
+        );
+        audioRef?.current.play();
       } else {
-        audio.pause();
+        dispatch(
+          setIsPlaying({ isPlaying: false, idPlayingTrack: currentSong?.id })
+        );
+        audioRef?.current.pause();
       }
     },
-    handleOnPlay() {
-      setIsPlaying(true);
-    },
-    handleOnPause() {
-      setIsPlaying(false);
-    },
-
     handleAdjustVolume(e) {
       const volumeAdjust = e.target.value / 100;
       audioRef.current.volume = volumeAdjust;
@@ -113,7 +121,9 @@ function Footer() {
     },
     handleOnEnded() {
       audioRef.current.load();
-      setIsPlaying(false);
+      dispatch(
+        setIsPlaying({ isPlaying: false, idPlayingTrack: currentSong?.id })
+      );
       progressBarRef.current.style.backgroundSize = '0% 100%';
     },
     handleVolumeChange() {
@@ -148,6 +158,33 @@ function Footer() {
       }
     },
   };
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    const onPlay = () => audio.play();
+
+    if (isPlaying && audio) {
+      audio.addEventListener('canplay', () => onPlay());
+      onPlay().catch((err) => {
+        console.log(err);
+      });
+      return;
+    } else {
+      audio.pause();
+    }
+
+    return () => {
+      if (audio) {
+        audio.removeEventListener('canplay', onPlay);
+      }
+    };
+  }, [isPlaying]);
+
+  useEffect(() => {
+    progressBarRef.current.style.backgroundSize = '0% 100%';
+
+    return () => {};
+  }, [idPlayingTrack]);
 
   return (
     <footer className={cx('wrapper')}>
@@ -200,7 +237,7 @@ function Footer() {
         </div>
       </div>
       <div className={cx('player')}>
-        <div className={cx('controls')}>
+        <div id="controls" className={cx('controls')}>
           <Tippy content="Enable shuffle" delay={200}>
             <button>
               <FontAwesomeIcon icon={faShuffle} />
@@ -211,25 +248,26 @@ function Footer() {
               <FontAwesomeIcon icon={faBackwardStep} />
             </button>
           </Tippy>
-          {!isPlaying ? (
-            <Tippy content="Play" delay={200}>
+          {isPlaying ? ( //1st time default: false
+            <Tippy content="Pause" delay={200}>
               <button
                 className={cx('play-btn')}
                 onClick={() => handleEventsSong.handleMusic(false)}
               >
-                <FontAwesomeIcon
-                  icon={faPlay}
-                  style={{ position: 'relative', left: '1px' }}
-                />
+                <FontAwesomeIcon id="pauseBtn" icon={faPause} />
               </button>
             </Tippy>
           ) : (
-            <Tippy content="Pause" delay={200}>
+            <Tippy content="Play" delay={200}>
               <button
                 className={cx('play-btn')}
                 onClick={() => handleEventsSong.handleMusic(true)}
               >
-                <FontAwesomeIcon icon={faPause} />
+                <FontAwesomeIcon
+                  id="playBtn"
+                  icon={faPlay}
+                  style={{ position: 'relative', left: '1px' }}
+                />
               </button>
             </Tippy>
           )}
@@ -315,13 +353,12 @@ function Footer() {
         </div>
       </div>
       <audio
+        // allow="autoplay"
         ref={audioRef}
         src={
           preview_url ??
           'https://c1-ex-swe.nixcdn.com/NhacCuaTui1010/ChungTaSauNay-TRI-6929586.mp3?st=cXI76wUdMSEV9Lyej4T9AA&e=1667613140&download=true'
         }
-        onPlay={() => handleEventsSong.handleOnPlay()}
-        onPause={() => handleEventsSong.handleOnPause()}
         onTimeUpdate={() => handleEventsSong.handleOnTimeUpdate()}
         onEnded={() => handleEventsSong.handleOnEnded()}
         onVolumeChange={() => handleEventsSong.handleVolumeChange()}

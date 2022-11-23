@@ -7,9 +7,10 @@ import MenuItem from '~/layouts/components/Sidebar/Menu/MenuItem';
 import { LikeFooterIcon } from '~/components/Icons';
 import Tippy from '@tippyjs/react';
 import { faEllipsis, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { addSong } from '~/store/actionsCreator/player';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsPlayingTrack, setIsPlaying } from '~/store/reducers/player';
 
 const cx = classNames.bind(styles);
 const $ = document.querySelector.bind(document);
@@ -17,35 +18,41 @@ const $ = document.querySelector.bind(document);
 function Playlist({ playlist, dominantColor }) {
   const tableHeaderRef = useRef();
   const dispatch = useDispatch();
-  const [playingIndex, setPlayingIndex] = useState(null);
+  const { isPlaying, idPlayingTrack } = useSelector(selectIsPlayingTrack);
 
   // Handle window scroll set sticky to table header
   useEffect(() => {
     const rightPaneEle = $('#rightPane');
     const headerEle = $('#header');
+    const tableHeader = tableHeaderRef.current;
     rightPaneEle.addEventListener('scroll', () => {
       if (rightPaneEle.scrollTop > 400) {
-        tableHeaderRef.current.style.background = 'var(--background-base)';
+        tableHeader.style.background = 'var(--background-base)';
         headerEle.style.background = dominantColor;
         headerEle.style.backgroundImage =
           'linear-gradient(rgba(0, 0, 0, 0.2) 0,rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.2) 100%)';
       } else {
-        tableHeaderRef.current.style.background = 'none';
+        tableHeader.style.background = 'none';
         headerEle.style.background = 'transparent';
         headerEle.style.backgroundImage = 'none';
       }
     });
 
     return () => {
+      tableHeader.style.background = 'none';
       headerEle.style.background = 'transparent';
       headerEle.style.backgroundImage = 'none';
       rightPaneEle.removeEventListener('scroll', () => {});
     };
   }, [dominantColor]);
 
-  const handleOnClickSong = (idSong, index) => {
-    setPlayingIndex(index);
-    dispatch(addSong(idSong));
+  const handleOnClickSong = (idSong, playingMode) => {
+    if (playingMode) {
+      dispatch(addSong(idSong));
+      dispatch(setIsPlaying({ isPlaying: true, idPlayingTrack: idSong }));
+    } else {
+      dispatch(setIsPlaying({ isPlaying: false, idPlayingTrack: idSong }));
+    }
   };
 
   return (
@@ -65,11 +72,11 @@ function Playlist({ playlist, dominantColor }) {
       <tbody>
         {playlist?.tracks?.items?.map((song, index) => {
           return (
-            <tr key={index} className={cx('song-row')} tabindex="0">
+            <tr key={index} className={cx('song-row')} tabIndex="0">
               {/* 1st column */}
               <td>
                 <span className={cx('song-index')}>
-                  {playingIndex === index + 1 ? (
+                  {isPlaying && idPlayingTrack === song?.track?.id ? (
                     <img
                       style={{ width: '14px', height: '14px' }}
                       src="https://open.spotifycdn.com/cdn/images/equaliser-animated-green.f93a2ef4.gif"
@@ -80,13 +87,11 @@ function Playlist({ playlist, dominantColor }) {
                   )}
                 </span>
 
-                {playingIndex === index + 1 ? (
+                {isPlaying && idPlayingTrack === song?.track?.id ? (
                   <Tippy content={'Pause'} delay={200}>
                     <span
                       className={cx('play-btn')}
-                      // onClick={() =>
-                      //   handleOnPauseSong(song?.track?.id, index + 1)
-                      // }
+                      onClick={() => handleOnClickSong(song?.track?.id, false)}
                     >
                       <FontAwesomeIcon icon={faPause} />
                     </span>
@@ -98,9 +103,7 @@ function Playlist({ playlist, dominantColor }) {
                   >
                     <span
                       className={cx('play-btn')}
-                      onClick={() =>
-                        handleOnClickSong(song?.track?.id, index + 1)
-                      }
+                      onClick={() => handleOnClickSong(song?.track?.id, true)}
                     >
                       <FontAwesomeIcon icon={faPlay} />
                     </span>

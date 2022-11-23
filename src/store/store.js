@@ -2,13 +2,15 @@ import { configureStore } from '@reduxjs/toolkit';
 import {
   topUserItemsReducer,
   playlistsReducer,
-  playerSlice,
+  playerSliceReducer,
+  isPlayingTrackSliceReducer,
 } from './reducers/index';
 
 export const store = configureStore({
   reducer: {
     topUserItems: topUserItemsReducer,
     playlists: playlistsReducer,
-    player: playerSlice,
+    player: playerSliceReducer,
+    isPlayingTrack: isPlayingTrackSliceReducer,
   },
 });
