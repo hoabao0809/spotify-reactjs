@@ -28,8 +28,8 @@ function Sidebar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { keyword } = useParams();
-  const paramSearch = keyword ? `/${keyword}` : '/browse';
+  // const { keyword } = useParams();
+  // const paramSearch = keyword ? `/${keyword}` : '/browse';
   const playlists = useSelector(selectPlaylists).playlists;
 
   useEffect(() => {
@@ -70,7 +70,7 @@ function Sidebar() {
             />
             <MenuItem
               title="Search"
-              to={config.routes.search + paramSearch}
+              to={config.routes.search} // + paramSearch
               icon={<SearchIcon />}
               activeIcon={<SearchActiveIcon />}
             />

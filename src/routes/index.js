@@ -2,7 +2,9 @@
 import { CoverLayout } from '~/layouts';
 
 import YourLibrary from '~/pages/YourLibrary';
-import Search from '~/pages/Search';
+
+import SearchBrowse from '~/pages/Search/components/SearchBrowse';
+import SearchOutput from '~/pages/Search/components/SearchOutput';
 import Home from '~/pages/Home';
 import Login from '~/pages/Login';
 import UserPlaylist from '~/pages/UserPlaylist';
@@ -10,7 +12,11 @@ import LikedSongs from '~/pages/LikedSongs';
 
 export const publicRoutes = [
   { path: '/', component: Home, exact: true },
-  { path: '/search/:keyword', component: Search, exact: true },
+  { path: '/search/:keyword', component: SearchOutput, exact: true },
+  { path: '/search/:keyword/:type', component: SearchOutput, exact: true },
+  { path: '/search/*', component: SearchBrowse, exact: true },
+  // { path: '/search/:keyword/:type', component: SearchOutput, exact: true },
+
   { path: '/collection/playlists', component: YourLibrary, exact: false },
   // { path: '/playlist', component: CreatePlaylist, exact: true },
   { path: '/playlist/:idPlaylist', component: UserPlaylist, exact: false },

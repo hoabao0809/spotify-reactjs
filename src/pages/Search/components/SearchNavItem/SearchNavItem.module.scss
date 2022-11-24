@@ -1,0 +1,17 @@
+.custom-wrapper {
+  margin-top: 80px !important;
+}
+
+.search-item {
+  margin: 0 1rem;
+  font-size: 1em;
+  font-weight: 400;
+  color: var(--text-base);
+  padding: 0.25rem 1.5rem;
+  border-radius: 999px;
+  background-color: var(--text-subdued);
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+}

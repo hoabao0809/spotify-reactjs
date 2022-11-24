@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCategories } from '~/store/reducers/categories';
 import { fetchCategories } from '~/store/actionsCreator/categories';
-import { Category } from '~/pages/components';
+import { Category, MainViewWrapper } from '~/pages/components';
 
 const cx = classNames.bind(styles);
 
@@ -21,17 +21,15 @@ function SearchBrowse() {
   }, []);
 
   return (
-    <div className={cx('wrapper')}>
-      <div className={cx('container')}>
-        <h1 className={cx('title')}>Browse all</h1>
+    <MainViewWrapper className={cx('custom-wrapper')}>
+      <h1 className={cx('title')}>Browse all</h1>
 
-        <div className={cx('categories')}>
-          {categories.map((category, index) => (
-            <Category key={index} category={category} />
-          ))}
-        </div>
+      <div className={cx('categories')}>
+        {categories.map((category, index) => (
+          <Category key={index} category={category} />
+        ))}
       </div>
-    </div>
+    </MainViewWrapper>
   );
 }
 

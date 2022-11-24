@@ -6,32 +6,51 @@ import styles from './Card.module.scss';
 import Button from '../Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { truncate } from '~/utils';
 
 const cx = classNames.bind(styles);
 
-function Card({ item, roundImg, squareImg, className, to, ...passProps }) {
-  // console.log(item);
-
-  const {  images, name, type } = item;
-
+function Card({
+  item,
+  roundImg,
+  squareImg,
+  horizontal,
+  className,
+  to,
+  ...passProps
+}) {
   const classes = cx('wrapper', {
     [className]: className,
     roundImg,
     squareImg,
+    horizontal,
   });
+  const fallbackImg =
+    'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2';
 
   return (
     <Link className={classes} {...passProps}>
       <div className={cx('container')}>
         <div className={cx('image-container')}>
-          <img className={cx('image')} src={images[0]?.url} alt="" />
+          <img
+            className={cx('image')}
+            src={
+              (item?.images && item?.images[0]?.url) ||
+              (item?.album && item?.album?.images[0]?.url) ||
+              fallbackImg
+            }
+            alt=""
+          />
+
           <Button className={cx('play-btn')} play>
-            <FontAwesomeIcon icon={faPlay} />
+            <FontAwesomeIcon className={cx('play-icon')} icon={faPlay} />
           </Button>
         </div>
         <div className={cx('content')}>
-          <h5>{name}</h5>
-          <span>{type.charAt(0).toUpperCase() + type.slice(1)}</span>
+          <h5>{truncate(item?.name, 50)}</h5>
+          <span>
+            {item?.type.charAt(0).toUpperCase() + item?.type.slice(1)}
+          </span>
         </div>
       </div>
     </Link>

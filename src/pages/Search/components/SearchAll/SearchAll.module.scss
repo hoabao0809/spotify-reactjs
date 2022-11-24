@@ -1,0 +1,13 @@
+.wrapper {
+  margin-top: 2rem;
+}
+
+.top-section {
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  grid-gap: 3rem;
+}
+
+.title {
+  margin: 1rem 0;
+}

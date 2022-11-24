@@ -1,0 +1,27 @@
+.row-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2rem;
+
+  overflow-x: scroll;
+}
+
+.row-container::-webkit-scrollbar {
+  border-radius: 0px;
+  height: 5px;
+}
+
+.row-container::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: hsla(0, 0%, 100%, 0.3);
+}
+
+.row-container::-webkit-scrollbar-thumb:hover {
+  background: hsla(0, 0%, 100%, 0.5);
+  transition: all 0.2s ease-in;
+}
+
+.row-container::-webkit-scrollbar-track {
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0);
+}

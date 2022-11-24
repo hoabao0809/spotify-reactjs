@@ -5,6 +5,8 @@ import {
   playerSliceReducer,
   isPlayingTrackSliceReducer,
   categoriesReducer,
+  searchStateReducer,
+  searchResultReducer,
 } from './reducers/index';
 
 export const store = configureStore({
@@ -14,5 +16,7 @@ export const store = configureStore({
     player: playerSliceReducer,
     isPlayingTrack: isPlayingTrackSliceReducer,
     categories: categoriesReducer,
+    searchState: searchStateReducer,
+    searchResult: searchResultReducer,
   },
 });

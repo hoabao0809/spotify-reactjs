@@ -44,7 +44,11 @@
   bottom: -7px;
   right: 7px;
   opacity: 0;
-  transition: all 0.3s ease;
+  transition: var(--transition);
+}
+
+.play-icon {
+  color: #181818;
 }
 
 .content {
@@ -69,5 +73,46 @@
 .roundImg {
   .image {
     border-radius: 50%;
+  }
+}
+
+.horizontal {
+  align-items: baseline;
+
+  &:hover {
+    .play-btn {
+      bottom: 25px;
+      opacity: 1;
+    }
+  }
+
+  .image-container {
+    width: 92px;
+    height: 92px;
+  }
+
+  .content {
+    h5 {
+      font-size: 32px;
+      padding-bottom: 1rem;
+    }
+
+    span {
+      font-size: 1em;
+      font-weight: 400;
+      color: var(--text-base);
+      padding: 0.25rem 1.5rem;
+      border-radius: 999px;
+      background-color: var(--background-base);
+    }
+  }
+
+  .image-container {
+    position: static;
+  }
+
+  .play-btn {
+    bottom: -5px;
+    right: 25px;
   }
 }

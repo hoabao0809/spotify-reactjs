@@ -1,0 +1,14 @@
+.custom-wrapper {
+  margin-top: 62px !important;
+}
+
+.navbar {
+  position: sticky;
+  top: var(--header-height);
+  left: 0;
+  z-index: 10;
+}
+
+.search-item {
+  margin: 0 1rem;
+}

@@ -11,13 +11,13 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
+  <React.Fragment>
     <Provider store={store}>
       <GlobalStyles>
         <App />
       </GlobalStyles>
     </Provider>
-  </React.StrictMode>
+  </React.Fragment>
 );
 
 // If you want to start measuring performance in your app, pass a function
