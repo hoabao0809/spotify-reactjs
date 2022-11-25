@@ -3,15 +3,29 @@
 }
 
 .search-item {
-  margin: 0 1rem;
+  margin: 0 0.75rem;
   font-size: 1em;
   font-weight: 400;
   color: var(--text-base);
-  padding: 0.25rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   border-radius: 999px;
-  background-color: var(--text-subdued);
+  background-color: var(--background-tinted-base);
+  transition: var(--transition);
 
   &:first-of-type {
     margin-left: 0;
+  }
+
+  &:hover {
+    background-color: #282828;
+  }
+}
+
+.active,
+.active:hover {
+  background-color: #fff;
+
+  .name {
+    color: #000;
   }
 }

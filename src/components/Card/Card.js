@@ -47,9 +47,10 @@ function Card({
           </Button>
         </div>
         <div className={cx('content')}>
-          <h5>{truncate(item?.name, 50)}</h5>
+          <h5>{item?.name && truncate(item?.name, 50)}</h5>
           <span>
-            {item?.type.charAt(0).toUpperCase() + item?.type.slice(1)}
+            {item?.type &&
+              item?.type.charAt(0).toUpperCase() + item?.type.slice(1)}
           </span>
         </div>
       </div>

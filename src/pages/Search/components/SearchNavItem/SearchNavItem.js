@@ -20,7 +20,7 @@ function SearchNavItem({ className, onClick, name, to }) {
       to={to}
       onClick={onClick}
     >
-      <span>{name}</span>
+      <span className={cx('name')}>{name}</span>
     </NavLink>
   );
 }
