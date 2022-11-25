@@ -3,8 +3,7 @@ import { CoverLayout } from '~/layouts';
 
 import YourLibrary from '~/pages/YourLibrary';
 
-import SearchBrowse from '~/pages/Search/components/SearchBrowse';
-import SearchOutput from '~/pages/Search/components/SearchOutput';
+import { SearchBrowse, SearchOutput } from '~/pages/Search';
 import Home from '~/pages/Home';
 import Login from '~/pages/Login';
 import UserPlaylist from '~/pages/UserPlaylist';

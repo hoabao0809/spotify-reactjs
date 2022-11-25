@@ -1,0 +1,15 @@
+.custom-wrapper {
+  margin-top: 80px !important;
+}
+
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2rem;
+}
+
+.title {
+  font-size: 2.25rem;
+  margin-bottom: 2rem;
+}

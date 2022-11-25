@@ -2,7 +2,9 @@ import axiosClient from './axiosClient';
 
 const searchApi = {
   getSearch: (q, type, market, limit) => {
-    const uri = `search?q=${q}&type=${type}&market=${market}&limit=${limit}`;
+    const uri = limit
+      ? `search?q=${q}&type=${type}&market=${market}&limit=${limit}`
+      : `search?q=${q}&type=${type}&market=${market}`;
     return axiosClient.get(uri);
   },
 };

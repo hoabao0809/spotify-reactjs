@@ -116,3 +116,61 @@
     right: 25px;
   }
 }
+
+.release {
+  position: relative;
+  // padding: 0 0.75rem;
+
+  &::after {
+    position: absolute;
+    content: '.';
+    top: -4px;
+    right: -2px;
+    font-weight: 900;
+  }
+}
+
+.release,
+.artist,
+.owner,
+.publisher {
+  display: none;
+}
+
+.customAlbumSearch {
+  .type {
+    display: none;
+  }
+
+  .release,
+  .artist {
+    display: inline;
+  }
+
+  .release {
+    padding-right: 0.75rem;
+  }
+  .artist {
+    padding-left: 0.75rem;
+  }
+}
+
+.customPlaylistSearch {
+  .type {
+    display: none;
+  }
+
+  .owner {
+    display: inline;
+  }
+}
+
+.customShowSearch {
+  .type {
+    display: none;
+  }
+
+  .publisher {
+    display: inline;
+  }
+}

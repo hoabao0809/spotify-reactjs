@@ -29,7 +29,8 @@ const searchResultSlice = createSlice({
 export const selectSearchState = (state) => state.searchState;
 export const selectSearchResult = (state) => state.searchResult;
 
-export const { addKeyword, addType } = searchStateSlice.actions;
+export const { addKeyword, addType } =
+  searchStateSlice.actions;
 export const { addSearchResult } = searchResultSlice.actions;
 
 export const searchStateReducer = searchStateSlice.reducer;

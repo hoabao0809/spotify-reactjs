@@ -5,7 +5,11 @@ import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCategories } from '~/store/reducers/categories';
 import { fetchCategories } from '~/store/actionsCreator/categories';
-import { Category, MainViewWrapper } from '~/pages/components';
+import {
+  Category,
+  MainViewWrapper,
+  EndingSeparation,
+} from '~/pages/components';
 
 const cx = classNames.bind(styles);
 
@@ -29,6 +33,8 @@ function SearchBrowse() {
           <Category key={index} category={category} />
         ))}
       </div>
+
+      <EndingSeparation />
     </MainViewWrapper>
   );
 }

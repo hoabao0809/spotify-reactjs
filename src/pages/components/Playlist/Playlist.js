@@ -12,6 +12,9 @@ const $ = document.querySelector.bind(document);
 function Playlist({ playlist, dominantColor }) {
   const tableHeaderRef = useRef();
 
+  const tracks =
+    (playlist?.tracks && playlist?.tracks?.items) || playlist?.items;
+
   // Handle window scroll set sticky to table header
   useEffect(() => {
     const rightPaneEle = $('#rightPane');
@@ -53,7 +56,7 @@ function Playlist({ playlist, dominantColor }) {
         </tr>
       </thead>
       <tbody>
-        {playlist?.tracks?.items?.map((song, index) => {
+        {tracks?.map((song, index) => {
           return <RowSong key={index} index={index} song={song} />;
         })}
       </tbody>

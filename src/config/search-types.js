@@ -1,86 +1,59 @@
-import { SearchAll, SearchAlbum } from '~/pages/Search/components/index';
+import {
+  SearchAll,
+  SearchTrack,
+  SearchComponent,
+} from '~/pages/Search';
 
 const searchTypes = {
   all: {
     name: 'All',
     type: null,
     component: SearchAll,
-    to: ''
+    to: '',
   },
-  album: {
-    name: 'Album',
-    type: 'album',
-    component: SearchAlbum,
-    to: '/album'
+  albums: {
+    name: 'Albums',
+    type: 'albums',
+    component: SearchComponent,
+    to: '/albums',
   },
-  playlist: {
-    name: 'Playlist',
-    type: 'playlist',
-    component: 'SearchPlaylist',
-    to: '/playlist'
+  artists: {
+    name: 'Artists',
+    type: 'artists',
+    component: SearchComponent,
+    to: '/artists',
+    css: 'roundImg',
   },
-  track: {
-    name: 'Track',
-    type: 'track',
-    component: 'SearchTrack',
-    to: '/track'
+  tracks: {
+    name: 'Tracks',
+    type: 'tracks',
+    component: SearchTrack,
+    to: '/tracks',
   },
-  show: {
-    name: 'Show',
-    type: 'show',
-    component: 'SearchShow',
-    to: '/show'
+  playlists: {
+    name: 'Playlists',
+    type: 'playlists',
+    component: SearchComponent,
+    to: '/playlists',
   },
-  episode: {
-    name: 'Episode',
-    type: 'episode',
-    component: 'SearchEpisode',
-    to: '/episode'
+  shows: {
+    name: 'Shows',
+    type: 'shows',
+    component: SearchComponent,
+    to: '/shows',
   },
-  audiobook: {
-    name: 'Audiobook',
-    type: 'audiobook',
-    component: 'SearchAudiobook',
-    to: '/audiobook'
+  episodes: {
+    name: 'Episodes',
+    type: 'episodes',
+    component: SearchComponent,
+    to: '/episodes',
+  },
+  audiobooks: {
+    name: 'Audiobooks',
+    type: 'audiobooks',
+    component: SearchComponent,
+    to: '/audiobooks',
   },
 };
-
-// const searchTypes = [
-//   {
-//     path: '/',
-//     type: 'all',
-//     component: SearchAll,
-//   },
-//   {
-//     name: 'Album',
-//     type: 'album',
-//     component: SearchAlbum,
-//   },
-//   {
-//     name: 'Playlist',
-//     type: 'playlist',
-//     component: 'SearchPlaylist',
-//   },
-//   {
-//     name: 'Track',
-//     type: 'track',
-//     component: 'SearchTrack',
-//   },
-//   {
-//     name: 'Show',
-//     type: 'show',
-//     component: 'SearchShow',
-//   },
-//   {
-//     name: 'Episode',
-//     type: 'episode',
-//     component: 'SearchEpisode',
-//   },
-//   {
-//     name: 'Audiobook',
-//     type: 'audiobook',
-//     component: 'SearchAudiobook',
-//   },
-// ];
 
 export default searchTypes;

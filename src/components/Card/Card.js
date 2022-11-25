@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 
@@ -15,6 +15,9 @@ function Card({
   roundImg,
   squareImg,
   horizontal,
+  customAlbumSearch,
+  customPlaylistSearch,
+  customShowSearch,
   className,
   to,
   ...passProps
@@ -24,10 +27,15 @@ function Card({
     roundImg,
     squareImg,
     horizontal,
+    customAlbumSearch,
+    customPlaylistSearch,
+    customShowSearch,
   });
   const fallbackImg =
     'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2';
+  const releaseDate = new Date(item?.release_date);
 
+  console.log(item);
   return (
     <Link className={classes} {...passProps}>
       <div className={cx('container')}>
@@ -47,15 +55,27 @@ function Card({
           </Button>
         </div>
         <div className={cx('content')}>
-          <h5>{item?.name && truncate(item?.name, 50)}</h5>
-          <span>
+          <h5 className={cx('name')}>
+            {item?.name && truncate(item?.name, 15)}
+          </h5>
+          <span className={cx('type')}>
             {item?.type &&
               item?.type.charAt(0).toUpperCase() + item?.type.slice(1)}
           </span>
+          <span className={cx('owner')}>
+            By {item?.owner && item?.owner?.display_name}
+          </span>
+          <span className={cx('release')}>
+            {item?.release_date && releaseDate.getFullYear()}
+          </span>
+          <span className={cx('artist')}>
+            {item?.artists && item?.artists[0]?.name}
+          </span>
+          <span className={cx('publisher')}>{item?.publisher}</span>
         </div>
       </div>
     </Link>
   );
 }
 
-export default Card;
+export default memo(Card);

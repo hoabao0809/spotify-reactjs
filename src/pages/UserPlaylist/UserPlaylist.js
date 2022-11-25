@@ -4,7 +4,11 @@ import { Link, useParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import { selectPlaylists } from '~/store/reducers/playlists';
 import { fetchPlaylist } from '~/store/actionsCreator/mainView';
-import { MainViewWrapper, Playlist } from '~/pages/components';
+import {
+  MainViewWrapper,
+  Playlist,
+  EndingSeparation,
+} from '~/pages/components';
 import { getAverageRGB } from '~/utils';
 import Button from '~/components/Button';
 
@@ -128,7 +132,7 @@ function UserPlaylist() {
           <Playlist playlist={playlist} dominantColor={dominantColor} />
         </div>
 
-        <div className={cx('footer')}></div>
+        <EndingSeparation />
       </div>
     </MainViewWrapper>
   );

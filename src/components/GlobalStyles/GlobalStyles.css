@@ -161,8 +161,9 @@ html *::-webkit-scrollbar-track {
   transition: var(--transition);
 }
 
-/* Handle scroll header */
-.header-sticky {
+/* Handle scroll header and searchNavbar */
+.header-sticky,
+.navbarSearchRef-sticky {
   background: var(--background-base);
   transition: var(--transition);
 }

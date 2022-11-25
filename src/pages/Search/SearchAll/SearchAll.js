@@ -7,6 +7,7 @@ import { useDebounce } from '~/hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSearch } from '~/store/actionsCreator/search';
 import { selectSearchResult, addSearchResult } from '~/store/reducers/search';
+
 import Card from '~/components/Card';
 import RowSingleSong from '~/components/RowSingleSong';
 import RowSixSongs from '~/components/RowSixSongs';
@@ -21,6 +22,7 @@ function SearchAll({ keyword }) {
   const types =
     'album%2Cartist%2Cplaylist%2Ctrack%2Cshow%2Cepisode%2Caudiobook';
 
+  // Filter out no result search by type
   const filteredNullSearch = Object.keys(searchResult).filter((result) => {
     return searchResult[result].items.length > 0;
   });
@@ -35,7 +37,6 @@ function SearchAll({ keyword }) {
 
   return (
     <section className={cx('wrapper')}>
-      {/* <div className={cx('top-result')}> */}
       <div className={cx('top-section')}>
         <div className={cx('top-result')}>
           <div className={cx('title')}>

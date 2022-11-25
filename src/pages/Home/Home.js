@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import styles from './Home.module.scss';
-import { TopItem, MainViewWrapper } from '~/pages/components';
+import { TopItem, MainViewWrapper, EndingSeparation } from '~/pages/components';
 import Card from '~/components/Card';
 
 import { selectTopUserItems } from '~/store/reducers/personalization';
@@ -60,6 +60,8 @@ function Home() {
         })
             * asda
            */}
+
+      <EndingSeparation />
     </MainViewWrapper>
   );
 }
