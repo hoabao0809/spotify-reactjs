@@ -36,11 +36,11 @@ function Button({
     [className]: className,
     primary,
     text,
-    play
+    play,
   });
 
   return (
-    <Comp className={classes} {...props}>
+    <Comp className={classes} {...props} onClick={onClick}>
       {children}
     </Comp>
   );

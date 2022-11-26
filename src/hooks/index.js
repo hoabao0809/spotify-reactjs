@@ -1,2 +1,2 @@
-export { default as useCurrentSong } from './useCurrentSong';
+export { default as useCurrentTracks } from './useCurrentTracks';
 export { default as useDebounce } from './useDebounce';

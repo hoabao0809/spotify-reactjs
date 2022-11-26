@@ -15,8 +15,13 @@ import Button from '~/components/Button';
 import styles from './UserPlaylist.module.scss';
 import { LikeFullBgIcon } from '~/components/Icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsis, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
+import {
+  addTracksToState,
+  selectIsPlayingTrack,
+  setIsPlaying,
+} from '~/store/reducers/player';
 
 const cx = classNames.bind(styles);
 const $ = document.querySelector.bind(document);
@@ -25,6 +30,9 @@ function UserPlaylist() {
   const { idPlaylist } = useParams('idPlaylist');
   const dispatch = useDispatch();
   const playlist = useSelector(selectPlaylists).playlist;
+  const { isPlaying, idPlayingTrack, indexPlayingTrack } =
+    useSelector(selectIsPlayingTrack);
+
   const playlistName = useRef();
   const [dominantColor, setDominantColor] = useState('transparent');
 
@@ -69,6 +77,36 @@ function UserPlaylist() {
     };
   }, [idPlaylist, playlist?.name]);
 
+  const handlePlayPlaylist = (playingMode) => {
+    if (playlist?.tracks?.items) {
+      if (playingMode && indexPlayingTrack === 0) {
+        const tracks = playlist?.tracks?.items?.reduce((prev, next) => {
+          return [...prev, next.track];
+        }, []);
+        dispatch(addTracksToState(tracks));
+        dispatch(
+          setIsPlaying({
+            isPlaying: true,
+            idPlayingTrack: playlist?.tracks?.items[0]?.track?.id,
+            indexPlayingTrack: 0,
+          })
+        );
+      } else if (playingMode && indexPlayingTrack > 0) {
+        dispatch(
+          setIsPlaying({ isPlaying: true, idPlayingTrack, indexPlayingTrack })
+        );
+      } else {
+        dispatch(
+          setIsPlaying({
+            isPlaying: false,
+            idPlayingTrack,
+            indexPlayingTrack,
+          })
+        );
+      }
+    }
+  };
+
   return (
     <MainViewWrapper className={cx('custom-wrapper')}>
       <div id="top-container" className={cx('top-container')}>
@@ -111,10 +149,23 @@ function UserPlaylist() {
 
       <div className={cx('songs-container')}>
         <div className={cx('play-section')}>
-          <Button play className={cx('play-btn')}>
-            <FontAwesomeIcon className={cx('play-icon')} icon={faPlay} />
-          </Button>
-
+          {isPlaying ? (
+            <Button
+              play
+              className={cx('play-btn')}
+              onClick={() => handlePlayPlaylist(false)}
+            >
+              <FontAwesomeIcon className={cx('play-icon')} icon={faPause} />
+            </Button>
+          ) : (
+            <Button
+              play
+              className={cx('play-btn')}
+              onClick={() => handlePlayPlaylist(true)}
+            >
+              <FontAwesomeIcon className={cx('play-icon')} icon={faPlay} />
+            </Button>
+          )}
           <Tippy content="Remove from Your Library" delay={200}>
             <button className={cx('like-btn')}>
               <LikeFullBgIcon width="32px" height="32px" />
@@ -129,7 +180,11 @@ function UserPlaylist() {
         </div>
 
         <div className={cx('songs-section')}>
-          <Playlist playlist={playlist} dominantColor={dominantColor} />
+          <Playlist
+            playlist={playlist}
+            dominantColor={dominantColor}
+            isUserPlaylist
+          />
         </div>
 
         <EndingSeparation />

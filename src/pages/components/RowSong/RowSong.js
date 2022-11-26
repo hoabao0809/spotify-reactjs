@@ -1,19 +1,32 @@
 import React, { memo } from 'react';
 import styles from './RowSong.module.scss';
 import classNames from 'classnames/bind';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tippy from '@tippyjs/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { faEllipsis, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 
 import MenuItem from '~/layouts/components/Sidebar/Menu/MenuItem';
 import { LikeFooterIcon } from '~/components/Icons';
-import Tippy from '@tippyjs/react';
-import { faEllipsis, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsPlayingTrack, setIsPlaying } from '~/store/reducers/player';
-import { addSong } from '~/store/actionsCreator/player';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  selectIsPlayingTrack,
+  addTracksToState,
+  setIsPlaying,
+} from '~/store/reducers/player';
+import { addTracksToStore } from '~/store/actionsCreator/player';
 
 const cx = classNames.bind(styles);
 
-function RowSong({ index, song, className, ...passProps }) {
+function RowSong({
+  playlist_id,
+  searchPlaylists,
+  index,
+  song,
+  className,
+  isSearchPlaylist,
+  isUserPlaylist,
+  ...passProps
+}) {
   const dispatch = useDispatch();
   const { isPlaying, idPlayingTrack } = useSelector(selectIsPlayingTrack);
 
@@ -21,12 +34,30 @@ function RowSong({ index, song, className, ...passProps }) {
     [className]: className,
   });
 
-  const handleOnClickSong = (idSong, playingMode) => {
+
+  const handleOnClickSong = (idSong, playingMode, index) => {
     if (playingMode) {
-      dispatch(addSong(idSong));
-      dispatch(setIsPlaying({ isPlaying: true, idPlayingTrack: idSong }));
+      if (isSearchPlaylist) {
+        dispatch(addTracksToState(searchPlaylists));
+      } else if (isUserPlaylist) {
+        dispatch(addTracksToStore(playlist_id, 'playlist'));
+      }
+
+      dispatch(
+        setIsPlaying({
+          isPlaying: true,
+          idPlayingTrack: idSong,
+          indexPlayingTrack: index,
+        })
+      );
     } else {
-      dispatch(setIsPlaying({ isPlaying: false, idPlayingTrack: idSong }));
+      dispatch(
+        setIsPlaying({
+          isPlaying: false,
+          idPlayingTrack: idSong,
+          indexPlayingTrack: index,
+        })
+      );
     }
   };
 
@@ -64,7 +95,7 @@ function RowSong({ index, song, className, ...passProps }) {
           <Tippy content={'Pause'} delay={200}>
             <span
               className={cx('play-btn')}
-              onClick={() => handleOnClickSong(renderSong.id, false)}
+              onClick={() => handleOnClickSong(renderSong.id, false, index)}
             >
               <FontAwesomeIcon icon={faPause} />
             </span>
@@ -76,7 +107,7 @@ function RowSong({ index, song, className, ...passProps }) {
           >
             <span
               className={cx('play-btn')}
-              onClick={() => handleOnClickSong(renderSong.id, true)}
+              onClick={() => handleOnClickSong(renderSong.id, true, index)}
             >
               <FontAwesomeIcon icon={faPlay} />
             </span>

@@ -26,7 +26,12 @@ function SearchTrack({ keyword }) {
   return (
     <section className={cx('wrapper')}>
       <div className={cx('content-section')}>
-        <Playlist playlist={searchResult} dominantColor="#121212" />
+        <Playlist
+          playlist={searchResult}
+          dominantColor="#121212"
+          isSearchPlaylist
+          searchPlaylists={searchResult?.tracks?.items}
+        />
       </div>
     </section>
   );

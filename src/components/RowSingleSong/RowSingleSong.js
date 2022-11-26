@@ -8,12 +8,12 @@ import Tippy from '@tippyjs/react';
 import { faEllipsis, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsPlayingTrack, setIsPlaying } from '~/store/reducers/player';
-import { addSong } from '~/store/actionsCreator/player';
+import { addTracksToState } from '~/store/reducers/player';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const cx = classNames.bind(styles);
 
-function RowSingleSong({ song, className, ...passProps }) {
+function RowSingleSong({ index, song, tracks, className, ...passProps }) {
   const dispatch = useDispatch();
   const { isPlaying, idPlayingTrack } = useSelector(selectIsPlayingTrack);
 
@@ -21,12 +21,25 @@ function RowSingleSong({ song, className, ...passProps }) {
     [className]: className,
   });
 
-  const handleOnClickSong = (idSong, playingMode) => {
+  const handleOnClickSong = (idSong, playingMode, index) => {
     if (playingMode) {
-      dispatch(addSong(idSong));
-      dispatch(setIsPlaying({ isPlaying: true, idPlayingTrack: idSong }));
+      dispatch(addTracksToState(tracks));
+
+      dispatch(
+        setIsPlaying({
+          isPlaying: true,
+          idPlayingTrack: idSong,
+          indexPlayingTrack: index,
+        })
+      );
     } else {
-      dispatch(setIsPlaying({ isPlaying: false, idPlayingTrack: idSong }));
+      dispatch(
+        setIsPlaying({
+          isPlaying: false,
+          idPlayingTrack: idSong,
+          indexPlayingTrack: index,
+        })
+      );
     }
   };
 
@@ -45,7 +58,7 @@ function RowSingleSong({ song, className, ...passProps }) {
               <div className={cx('play-container')}>
                 <span
                   className={cx('play-btn')}
-                  onClick={() => handleOnClickSong(song?.id, false)}
+                  onClick={() => handleOnClickSong(song?.id, false, index)}
                 >
                   <FontAwesomeIcon icon={faPause} />
                 </span>
@@ -59,7 +72,7 @@ function RowSingleSong({ song, className, ...passProps }) {
               <div className={cx('play-container')}>
                 <span
                   className={cx('play-btn')}
-                  onClick={() => handleOnClickSong(song?.id, true)}
+                  onClick={() => handleOnClickSong(song?.id, true, index)}
                 >
                   <FontAwesomeIcon icon={faPlay} />
                 </span>

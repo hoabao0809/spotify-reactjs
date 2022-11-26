@@ -1,2 +1,9 @@
-export { default as browseApi } from './browseApi';
-export { default as searchApi } from './searchApi';
+export { default as browseApi } from './browse';
+export { default as searchApi } from './search';
+export { default as albumApi } from './album';
+export { default as playerApi } from './player';
+export { default as artistApi } from './artist';
+export { default as playlistApi } from './playlist';
+export { default as personalization } from './personalization';
+export { default as showApi } from './show';
+export { default as episodeApi } from './episode';

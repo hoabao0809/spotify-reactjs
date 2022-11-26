@@ -50,7 +50,12 @@ function SearchAll({ keyword }) {
           </div>
           <div className={cx('songs-container')}>
             {searchResult?.tracks?.items?.slice(0, 4).map((song, index) => (
-              <RowSingleSong key={index} index={index} song={song} />
+              <RowSingleSong
+                key={index}
+                index={index}
+                song={song}
+                tracks={searchResult?.tracks?.items}
+              />
             ))}
           </div>
         </div>

@@ -1,10 +1,10 @@
-import playlistsApi from '~/api/playlists';
+import { playlistApi } from '~/api';
 
 import { addPlaylists } from '~/store/reducers/playlists';
 
 export const fetchPlaylists = () => {
   return (dispatch) => {
-    playlistsApi
+    playlistApi
       .getUserPlaylists()
       .then((response) => {
         if (!response) {

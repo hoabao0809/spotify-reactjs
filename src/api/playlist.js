@@ -5,8 +5,12 @@ const playlistsApi = {
     const uri = `me/playlists`;
     return axiosClient.get(uri);
   },
-  getPlaylist: (idPlaylist) => {
-    const uri = `playlists/${idPlaylist}`;
+  getPlaylist: (playlist_id) => {
+    const uri = `playlists/${playlist_id}`;
+    return axiosClient.get(uri);
+  },
+  getPlaylistItems: (playlist_id) => {
+    const uri = `playlists/${playlist_id}/tracks`;
     return axiosClient.get(uri);
   },
 };

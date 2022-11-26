@@ -9,7 +9,7 @@ import { RowSong } from '~/pages/components';
 const cx = classNames.bind(styles);
 const $ = document.querySelector.bind(document);
 
-function Playlist({ playlist, dominantColor }) {
+function Playlist({ playlist, dominantColor, ...props }) {
   const tableHeaderRef = useRef();
 
   const tracks =
@@ -57,7 +57,15 @@ function Playlist({ playlist, dominantColor }) {
       </thead>
       <tbody>
         {tracks?.map((song, index) => {
-          return <RowSong key={index} index={index} song={song} />;
+          return (
+            <RowSong
+              key={index}
+              index={index}
+              song={song}
+              playlist_id={playlist.id}
+              {...props}
+            />
+          );
         })}
       </tbody>
     </table>

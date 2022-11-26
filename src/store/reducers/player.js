@@ -1,14 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const playerInitialState = { currentSong: {} };
-const isPlayingTrackInitState = { isPlaying: false, idPlayingTrack: null };
+const playerInitialState = { currentTracks: [] };
+const isPlayingTrackInitState = { isPlaying: false, idPlayingTrack: null, indexPlayingTrack: 0, idPlayingPlaylist: null };
 
 const playerSlice = createSlice({
   name: 'player',
   initialState: playerInitialState,
   reducers: {
-    addCurrentPlayingSong: (state, action) => {
-      state.currentSong = action.payload;
+    addTracksToState: (state, action) => {
+      state.currentTracks = action.payload;
+    },
+    addPlaylist: (state, action) => {
+      state.currentTracks = action.payload;
+    },
+    addTrack: (state, action) => {
+      state.currentTracks = [...state.currentTracks, action.payload];
     },
   },
 });
@@ -23,10 +29,10 @@ const isPlayingTrackSlice = createSlice({
   },
 });
 
-export const selectCurrentSong = (state) => state.player.currentSong;
+export const selectCurrentTracks = (state) => state.player.currentTracks;
 export const selectIsPlayingTrack = (state) => state.isPlayingTrack;
 
-export const { addCurrentPlayingSong } = playerSlice.actions;
+export const { addTracksToState, addPlaylist, addTrack } = playerSlice.actions;
 export const { setIsPlaying } = isPlayingTrackSlice.actions;
 
 export const playerSliceReducer = playerSlice.reducer;

@@ -27,7 +27,7 @@ import {
   VolumeHighIcon,
 } from '~/components/Icons';
 import { formatTime } from '~/utils';
-import { useCurrentSong } from '~/hooks';
+import { useCurrentTracks } from '~/hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsPlayingTrack, setIsPlaying } from '~/store/reducers/player';
 
@@ -42,8 +42,13 @@ function Footer() {
   const dispatch = useDispatch();
 
   // Local States
-  const currentSong = useCurrentSong();
-  const { isPlaying, idPlayingTrack } = useSelector(selectIsPlayingTrack);
+  const { isPlaying, idPlayingTrack, indexPlayingTrack, idPlayingPlaylist } =
+    useSelector(selectIsPlayingTrack);
+
+  const currentTracks = useCurrentTracks();
+  const currentSong = currentTracks && currentTracks[indexPlayingTrack];
+
+  console.log(indexPlayingTrack, currentSong);
 
   const [currentVolume, setCurrentVolume] = useState(() => {
     const volumeLocalStorage = localStorage.getItem('playback');
@@ -54,7 +59,8 @@ function Footer() {
   });
   const [isMuted, setIsMuted] = useState(false);
 
-  const preview_url = currentSong?.preview_url;
+  const preview_url =
+    currentSong?.preview_url || currentSong?.audio_preview_url;
   const audioRef = useRef(
     new Audio(
       preview_url ||
@@ -88,12 +94,22 @@ function Footer() {
     handleMusic(_isPlaying) {
       if (_isPlaying) {
         dispatch(
-          setIsPlaying({ isPlaying: true, idPlayingTrack: currentSong?.id })
+          setIsPlaying({
+            isPlaying: true,
+            idPlayingTrack: currentSong?.id,
+            indexPlayingTrack,
+            idPlayingPlaylist,
+          })
         );
         audioRef?.current.play();
       } else {
         dispatch(
-          setIsPlaying({ isPlaying: false, idPlayingTrack: currentSong?.id })
+          setIsPlaying({
+            isPlaying: false,
+            idPlayingTrack: currentSong?.id,
+            indexPlayingTrack,
+            idPlayingPlaylist,
+          })
         );
         audioRef?.current.pause();
       }
