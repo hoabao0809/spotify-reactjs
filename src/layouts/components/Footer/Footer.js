@@ -29,7 +29,12 @@ import {
 import { formatTime } from '~/utils';
 import { useCurrentTracks } from '~/hooks';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsPlayingTrack, setIsPlaying } from '~/store/reducers/player';
+import {
+  selectIsPlayingTrack,
+  setIsPlaying,
+  selectPlayerConfig,
+  alterConfig,
+} from '~/store/reducers/player';
 
 const $ = document.querySelector.bind(document);
 const cx = classNames.bind(styles);
@@ -38,17 +43,19 @@ function Footer() {
   const progressBarRef = useRef();
   const currentTime = useRef();
   const volumeBarRef = useRef();
+  const btnNextRef = useRef();
+  const btnPrevRef = useRef();
+  const btnPlayRef = useRef();
 
   const dispatch = useDispatch();
 
   // Local States
   const { isPlaying, idPlayingTrack, indexPlayingTrack, idPlayingPlaylist } =
     useSelector(selectIsPlayingTrack);
+  const { isRepeat, isShuffle } = useSelector(selectPlayerConfig);
 
   const currentTracks = useCurrentTracks();
   const currentSong = currentTracks && currentTracks[indexPlayingTrack];
-
-  console.log(indexPlayingTrack, currentSong);
 
   const [currentVolume, setCurrentVolume] = useState(() => {
     const volumeLocalStorage = localStorage.getItem('playback');
@@ -61,12 +68,7 @@ function Footer() {
 
   const preview_url =
     currentSong?.preview_url || currentSong?.audio_preview_url;
-  const audioRef = useRef(
-    new Audio(
-      preview_url ||
-        'https://c1-ex-swe.nixcdn.com/NhacCuaTui1010/ChungTaSauNay-TRI-6929586.mp3?st=cXI76wUdMSEV9Lyej4T9AA&e=1667613140&download=true'
-    )
-  );
+  const audioRef = useRef(new Audio(preview_url));
   // Variables
   const previewDuration = formatTime(audioRef?.current?.duration);
   const artists = currentSong?.artists;
@@ -135,11 +137,12 @@ function Footer() {
       audioRef.current.currentTime = seekTime;
     },
     handleOnEnded() {
-      audioRef.current.load();
-      dispatch(
-        setIsPlaying({ isPlaying: false, idPlayingTrack: currentSong?.id })
-      );
-      progressBarRef.current.style.backgroundSize = '0% 100%';
+      if (!isRepeat) {
+        btnNextRef.current.click();
+      } else {
+        audioRef.current.load();
+        progressBarRef.current.style.backgroundSize = '0% 100%';
+      }
     },
     handleVolumeChange() {
       const _currentVolume = audioRef.current.volume;
@@ -172,6 +175,78 @@ function Footer() {
           currentVolume * 100 + '% 100%';
       }
     },
+    handleClickNext() {
+      if (isShuffle) {
+        this.loadRandomSong();
+      } else {
+        const nextIndex = +indexPlayingTrack + 1;
+
+        if (nextIndex >= currentTracks.length) {
+          dispatch(
+            setIsPlaying({
+              isPlaying: true,
+              idPlayingTrack: currentTracks[0].id,
+              indexPlayingTrack: 0,
+            })
+          );
+          audioRef.current.load();
+        } else {
+          dispatch(
+            setIsPlaying({
+              isPlaying: true,
+              idPlayingTrack: currentTracks[nextIndex].id,
+              indexPlayingTrack: nextIndex,
+            })
+          );
+        }
+      }
+    },
+    handleClickPrev() {
+      if (isShuffle) {
+        this.loadRandomSong();
+      } else {
+        const prevIndex = +indexPlayingTrack - 1;
+        if (prevIndex <= 0) {
+          dispatch(
+            setIsPlaying({
+              isPlaying: true,
+              idPlayingTrack: currentTracks[0].id,
+              indexPlayingTrack: 0,
+              idPlayingPlaylist,
+            })
+          );
+          audioRef.current.load();
+        } else {
+          dispatch(
+            setIsPlaying({
+              isPlaying: true,
+              idPlayingTrack: currentTracks[prevIndex].id,
+              indexPlayingTrack: prevIndex,
+              idPlayingPlaylist,
+            })
+          );
+        }
+      }
+    },
+    loadRandomSong() {
+      let randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * currentTracks.length);
+      } while (randomIndex === this.currentIndex);
+
+      dispatch(
+        setIsPlaying({
+          idPlayingTrack: currentTracks[randomIndex].id,
+          indexPlayingTrack: randomIndex,
+        })
+      );
+    },
+    handleRepeat() {
+      dispatch(alterConfig({ isRepeat: !isRepeat }));
+    },
+    handleShuffle() {
+      dispatch(alterConfig({ isShuffle: !isShuffle }));
+    },
   };
 
   useEffect(() => {
@@ -199,7 +274,13 @@ function Footer() {
     progressBarRef.current.style.backgroundSize = '0% 100%';
 
     return () => {};
-  }, [idPlayingTrack]);
+  }, [idPlayingTrack, indexPlayingTrack]);
+
+  useEffect(() => {
+    progressBarRef.current.style.backgroundSize = '0% 100%';
+
+    return () => {};
+  }, []);
 
   return (
     <footer className={cx('wrapper')}>
@@ -247,13 +328,25 @@ function Footer() {
       </div>
       <div className={cx('player')}>
         <div id="controls" className={cx('controls')}>
-          <Tippy content="Enable shuffle" delay={200}>
-            <button>
+          <Tippy
+            content={isShuffle ? 'Disable shuffle' : 'Enable shuffle'}
+            delay={200}
+          >
+            <button
+              onClick={() => handleEventsSong.handleShuffle()}
+              className={cx('shuffle-btn', {
+                'is-config': isShuffle,
+              })}
+            >
               <FontAwesomeIcon icon={faShuffle} />
             </button>
           </Tippy>
           <Tippy content="Previous" delay={200}>
-            <button>
+            <button
+              ref={btnPrevRef}
+              className={cx('prev-btn')}
+              onClick={() => handleEventsSong.handleClickPrev()}
+            >
               <FontAwesomeIcon icon={faBackwardStep} />
             </button>
           </Tippy>
@@ -269,6 +362,7 @@ function Footer() {
           ) : (
             <Tippy content="Play" delay={200}>
               <button
+                ref={btnPlayRef}
                 className={cx('play-btn')}
                 onClick={() => handleEventsSong.handleMusic(true)}
               >
@@ -282,12 +376,24 @@ function Footer() {
           )}
 
           <Tippy content="Next" delay={200}>
-            <button>
+            <button
+              ref={btnNextRef}
+              className={cx('next-btn')}
+              onClick={() => handleEventsSong.handleClickNext()}
+            >
               <FontAwesomeIcon icon={faForwardStep} />
             </button>
           </Tippy>
-          <Tippy content="Enable repeat" delay={200}>
-            <button>
+          <Tippy
+            content={isRepeat ? 'Disable repeat' : 'Enable repeat'}
+            delay={200}
+          >
+            <button
+              onClick={() => handleEventsSong.handleRepeat()}
+              className={cx('repeat-btn', {
+                'is-config': isRepeat,
+              })}
+            >
               <FontAwesomeIcon icon={faRepeat} />
             </button>
           </Tippy>
@@ -366,7 +472,7 @@ function Footer() {
         ref={audioRef}
         src={
           preview_url ??
-          'https://c1-ex-swe.nixcdn.com/NhacCuaTui1010/ChungTaSauNay-TRI-6929586.mp3?st=cXI76wUdMSEV9Lyej4T9AA&e=1667613140&download=true'
+          'https://data51.chiasenhac.com/downloads/1006/0/1005888-c2b49777/128/Rhythm%20Of%20The%20Rain%20-%20Cascades.mp3'
         }
         onTimeUpdate={() => handleEventsSong.handleOnTimeUpdate()}
         onEnded={() => handleEventsSong.handleOnEnded()}

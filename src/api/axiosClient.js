@@ -31,8 +31,6 @@ axiosClient.interceptors.response.use(
       return response.data;
     }
 
-    console.log('response ', response);
-
     return response;
   },
   function (error) {

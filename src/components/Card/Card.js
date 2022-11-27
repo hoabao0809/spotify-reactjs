@@ -9,11 +9,7 @@ import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { truncate } from '~/utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTracksToStore } from '~/store/actionsCreator/player';
-import {
-  selectIsPlayingTrack,
-  setIsPlaying,
-  selectCurrentTracks,
-} from '~/store/reducers/player';
+import { selectIsPlayingTrack, setIsPlaying } from '~/store/reducers/player';
 
 const cx = classNames.bind(styles);
 
@@ -32,7 +28,6 @@ function Card({
   const dispatch = useDispatch();
   const { isPlaying, idPlayingTrack, indexPlayingTrack, idPlayingPlaylist } =
     useSelector(selectIsPlayingTrack);
-  const currentTracks = useSelector(selectCurrentTracks);
 
   const classes = cx('wrapper', {
     [className]: className,
@@ -51,24 +46,17 @@ function Card({
     const { id, type } = item;
 
     if (item) {
-      if (playingMode && indexPlayingTrack === 0) {
-        dispatch(addTracksToStore(id, type));
-
+      if (playingMode) {
         dispatch(
-          setIsPlaying({
-            isPlaying: true,
-            idPlayingTrack: currentTracks && currentTracks[0].id,
-            indexPlayingTrack: 0,
-            idPlayingPlaylist: id,
-          })
-        );
-      } else if (playingMode && indexPlayingTrack > 0) {
-        dispatch(
-          setIsPlaying({
-            isPlaying: true,
-            idPlayingTrack,
-            indexPlayingTrack,
-            idPlayingPlaylist: id,
+          addTracksToStore({ id, type }, (tracks) => {
+            dispatch(
+              setIsPlaying({
+                isPlaying: true,
+                idPlayingTrack: tracks && tracks[0].id,
+                indexPlayingTrack: 0,
+                idPlayingPlaylist: id,
+              })
+            );
           })
         );
       } else {
@@ -98,24 +86,25 @@ function Card({
             alt=""
           />
 
-          {isPlaying && item?.id === idPlayingPlaylist ? (
-            <Button
-              play
-              className={cx('play-btn')}
-              style={isPlaying && { bottom: '25px', opacity: 1 }}
-              onClick={() => handlePlayPlaylist(item, false)}
-            >
-              <FontAwesomeIcon className={cx('play-icon')} icon={faPause} />
-            </Button>
-          ) : (
-            <Button
-              play
-              className={cx('play-btn')}
-              onClick={() => handlePlayPlaylist(item, true)}
-            >
-              <FontAwesomeIcon className={cx('play-icon')} icon={faPlay} />
-            </Button>
-          )}
+          <Button
+            play
+            className={cx('play-btn', {
+              'playBtn-clicked': isPlaying && item?.id === idPlayingPlaylist,
+            })}
+            onClick={() =>
+              handlePlayPlaylist(
+                item,
+                isPlaying && item?.id === idPlayingPlaylist ? false : true
+              )
+            }
+          >
+            <FontAwesomeIcon
+              className={cx('play-icon')}
+              icon={
+                isPlaying && item?.id === idPlayingPlaylist ? faPause : faPlay
+              }
+            />
+          </Button>
         </div>
         <div className={cx('content')}>
           <h5 className={cx('name')}>

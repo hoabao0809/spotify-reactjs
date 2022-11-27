@@ -24,19 +24,19 @@ export const addSong = (idSong) => {
   };
 };
 
-export const addTracksToStore = (id, type) => {
+export const addTracksToStore = ({ id, type }, callback) => {
   return (dispatch) => {
     switch (type) {
       case 'album':
         albumApi
           .getAlbumTracks(id)
           .then((response) => {
-            console.log(response);
             if (response.status === 204 || response.status > 400) {
               return false;
             }
 
             dispatch(addTracksToState(response.items));
+            callback(response.items);
           })
           .catch((error) => console.log(error));
         break;
@@ -54,6 +54,7 @@ export const addTracksToStore = (id, type) => {
             }, []);
 
             dispatch(addTracksToState(tracks));
+            callback(response.items);
           })
           .catch((error) => console.log(error));
         break;
@@ -66,6 +67,7 @@ export const addTracksToStore = (id, type) => {
               return false;
             }
             dispatch(addTracksToState(response.tracks));
+            callback(response.items);
           })
           .catch((error) => console.log(error));
         break;
@@ -78,6 +80,7 @@ export const addTracksToStore = (id, type) => {
               return false;
             }
             dispatch(addTracksToState(response.items));
+            callback(response.items);
           })
           .catch((error) => console.log(error));
         break;
@@ -86,11 +89,11 @@ export const addTracksToStore = (id, type) => {
         episodeApi
           .getEpisodes(id)
           .then((response) => {
-            console.log(response);
             if (response.status === 204 || response.status > 400) {
               return false;
             }
             dispatch(addTrack(response));
+            callback(response.items);
           })
           .catch((error) => console.log(error));
         break;

@@ -2,17 +2,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { playerApi } from '~/api';
 
-import {
-  selectCurrentTracks,
-  addTrack,
-} from '~/store/reducers/player';
+import { selectCurrentTracks, addTrack } from '~/store/reducers/player';
 
 function useCurrentTracks() {
   const dispatch = useDispatch();
   const currentTracks = useSelector(selectCurrentTracks);
   const [currentPlayingTracks, setCurrentPlayingTracks] = useState(null);
-
-  console.log(currentTracks);
 
   useEffect(() => {
     if (currentTracks?.length === 0) {

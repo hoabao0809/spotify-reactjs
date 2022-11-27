@@ -34,20 +34,24 @@ function RowSong({
     [className]: className,
   });
 
-
   const handleOnClickSong = (idSong, playingMode, index) => {
     if (playingMode) {
       if (isSearchPlaylist) {
         dispatch(addTracksToState(searchPlaylists));
       } else if (isUserPlaylist) {
-        dispatch(addTracksToStore(playlist_id, 'playlist'));
+        dispatch(
+          addTracksToStore(
+            { id: playlist_id, type: 'playlist' },
+            (tracks) => {}
+          )
+        );
       }
-
       dispatch(
         setIsPlaying({
           isPlaying: true,
           idPlayingTrack: idSong,
           indexPlayingTrack: index,
+          idPlayingPlaylist: playlist_id,
         })
       );
     } else {
@@ -56,6 +60,7 @@ function RowSong({
           isPlaying: false,
           idPlayingTrack: idSong,
           indexPlayingTrack: index,
+          idPlayingPlaylist: playlist_id,
         })
       );
     }
@@ -90,6 +95,32 @@ function RowSong({
             index + 1
           )}
         </span>
+
+        {/* <Tippy
+          content={
+            isPlaying
+              ? 'Pause'
+              : `Play ${renderSong.name}. by ${renderSong.artists}`
+          }
+          delay={200}
+        >
+          <span
+            className={cx('play-btn')}
+            onClick={() =>
+              handleOnClickSong(
+                renderSong.id,
+                isPlaying && idPlayingTrack === renderSong.id ? false : true,
+                index
+              )
+            }
+          >
+            <FontAwesomeIcon
+              icon={
+                isPlaying && idPlayingTrack === renderSong.id ? faPause : faPlay
+              }
+            />
+          </span>
+        </Tippy> */}
 
         {isPlaying && idPlayingTrack === renderSong.id ? (
           <Tippy content={'Pause'} delay={200}>

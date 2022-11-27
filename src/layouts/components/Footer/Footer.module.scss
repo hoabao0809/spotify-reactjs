@@ -104,9 +104,12 @@ button {
   border: none;
   height: 32px;
   width: 32px;
+  opacity: 0.8;
+  transition: var(--transition);
 
   &:hover {
     color: #fff;
+    opacity: 1;
   }
 }
 
@@ -143,6 +146,24 @@ button {
   }
 }
 
+// IsRepeated
+.is-config {
+  position: relative;
+  color: #1ed760;
+
+  &::after {
+    content: '.';
+    position: absolute;
+    font-size: 3rem;
+    transform: translate(-16px, 0px);
+  }
+
+  &:hover {
+    color: #1fdf64;
+  }
+}
+
+// Audio progress bar
 .progress {
   width: 100%;
   display: flex;

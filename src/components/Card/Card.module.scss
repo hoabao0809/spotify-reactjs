@@ -47,6 +47,11 @@
   transition: var(--transition);
 }
 
+.playBtn-clicked {
+  bottom: 25px !important;
+  opacity: 1 !important;
+}
+
 .play-icon {
   color: #181818;
 }

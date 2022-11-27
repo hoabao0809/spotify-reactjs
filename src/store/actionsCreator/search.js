@@ -6,7 +6,6 @@ export const fetchSearch = (...args) => {
     searchApi
       .getSearch(...args)
       .then((response) => {
-        // console.log(response);
         if (!response) {
           throw new Error('Could not fetch data');
         }

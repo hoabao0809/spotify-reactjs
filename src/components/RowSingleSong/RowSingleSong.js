@@ -7,8 +7,11 @@ import { LikeFooterIcon } from '~/components/Icons';
 import Tippy from '@tippyjs/react';
 import { faEllipsis, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsPlayingTrack, setIsPlaying } from '~/store/reducers/player';
-import { addTracksToState } from '~/store/reducers/player';
+import {
+  selectIsPlayingTrack,
+  setIsPlaying,
+  addTracksToState,
+} from '~/store/reducers/player';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const cx = classNames.bind(styles);
