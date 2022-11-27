@@ -96,32 +96,6 @@ function RowSong({
           )}
         </span>
 
-        {/* <Tippy
-          content={
-            isPlaying
-              ? 'Pause'
-              : `Play ${renderSong.name}. by ${renderSong.artists}`
-          }
-          delay={200}
-        >
-          <span
-            className={cx('play-btn')}
-            onClick={() =>
-              handleOnClickSong(
-                renderSong.id,
-                isPlaying && idPlayingTrack === renderSong.id ? false : true,
-                index
-              )
-            }
-          >
-            <FontAwesomeIcon
-              icon={
-                isPlaying && idPlayingTrack === renderSong.id ? faPause : faPlay
-              }
-            />
-          </span>
-        </Tippy> */}
-
         {isPlaying && idPlayingTrack === renderSong.id ? (
           <Tippy content={'Pause'} delay={200}>
             <span

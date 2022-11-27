@@ -1,0 +1,26 @@
+.menu-item {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  min-block-size: 0 !important;
+  border-radius: 2px !important;
+  padding: 10px !important;
+  gap: 2rem;
+  cursor: default !important;
+
+  &.separate {
+    border-top: 0.1px solid rgb(179 179 179 / 25%);
+  }
+
+  &:hover {
+    transform: unset !important;
+    background-color: hsla(0, 0%, 100%, 0.1);
+  }
+}
+
+.title,
+.icon {
+  font-size: 0.875em;
+  color: hsla(0, 0%, 100%, 0.9);
+  font-weight: 400;
+}

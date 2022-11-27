@@ -7,3 +7,4 @@ export {
   isPlayingTrackReducer,
   playerConfigReducer,
 } from './player';
+export { default as isToggleUserReducer } from './user';

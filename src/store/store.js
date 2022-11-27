@@ -8,6 +8,7 @@ import {
   searchStateReducer,
   searchResultReducer,
   playerConfigReducer,
+  isToggleUserReducer,
 } from './reducers/index';
 
 export const store = configureStore({
@@ -20,5 +21,6 @@ export const store = configureStore({
     searchState: searchStateReducer,
     searchResult: searchResultReducer,
     playerConfig: playerConfigReducer,
+    isToggleUser: isToggleUserReducer,
   },
 });

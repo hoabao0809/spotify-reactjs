@@ -19,7 +19,6 @@ function MenuItem({ title, to, icon, activeIcon, className }) {
           }
         )
       }
-     
       to={to}
     >
       {icon && activeIcon && (

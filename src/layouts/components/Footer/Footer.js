@@ -295,7 +295,7 @@ function Footer() {
             <Tippy content="Expand" delay={200}>
               <button
                 id="footer-angleUp"
-                className={cx('btn-anglePopUp')}
+                className={cx('btn-anglePopUp', 'footer-btn')}
                 onClick={() => handleOnClickArrowUp()}
               >
                 <FontAwesomeIcon icon={faAngleUp} />
@@ -315,12 +315,12 @@ function Footer() {
         </div>
         <div className={cx('interactions')}>
           <Tippy content="Save to Your Library" delay={200}>
-            <button type="button">
+            <button type="button" className={cx('footer-btn')}>
               <LikeFooterIcon />
             </button>
           </Tippy>
           <Tippy content="Picture in Picture" delay={200}>
-            <button type="button">
+            <button type="button" className={cx('footer-btn')}>
               <PictureInPictureIcon />
             </button>
           </Tippy>
@@ -334,9 +334,13 @@ function Footer() {
           >
             <button
               onClick={() => handleEventsSong.handleShuffle()}
-              className={cx('shuffle-btn', {
-                'is-config': isShuffle,
-              })}
+              className={cx(
+                'shuffle-btn',
+                {
+                  'is-config': isShuffle,
+                },
+                'footer-btn'
+              )}
             >
               <FontAwesomeIcon icon={faShuffle} />
             </button>
@@ -344,7 +348,7 @@ function Footer() {
           <Tippy content="Previous" delay={200}>
             <button
               ref={btnPrevRef}
-              className={cx('prev-btn')}
+              className={cx('prev-btn', 'footer-btn')}
               onClick={() => handleEventsSong.handleClickPrev()}
             >
               <FontAwesomeIcon icon={faBackwardStep} />
@@ -353,7 +357,7 @@ function Footer() {
           {isPlaying ? ( //1st time default: false
             <Tippy content="Pause" delay={200}>
               <button
-                className={cx('play-btn')}
+                className={cx('play-btn', 'footer-btn')}
                 onClick={() => handleEventsSong.handleMusic(false)}
               >
                 <FontAwesomeIcon id="pauseBtn" icon={faPause} />
@@ -363,7 +367,7 @@ function Footer() {
             <Tippy content="Play" delay={200}>
               <button
                 ref={btnPlayRef}
-                className={cx('play-btn')}
+                className={cx('play-btn', 'footer-btn')}
                 onClick={() => handleEventsSong.handleMusic(true)}
               >
                 <FontAwesomeIcon
@@ -378,7 +382,7 @@ function Footer() {
           <Tippy content="Next" delay={200}>
             <button
               ref={btnNextRef}
-              className={cx('next-btn')}
+              className={cx('next-btn', 'footer-btn')}
               onClick={() => handleEventsSong.handleClickNext()}
             >
               <FontAwesomeIcon icon={faForwardStep} />
@@ -390,9 +394,13 @@ function Footer() {
           >
             <button
               onClick={() => handleEventsSong.handleRepeat()}
-              className={cx('repeat-btn', {
-                'is-config': isRepeat,
-              })}
+              className={cx(
+                'repeat-btn',
+                {
+                  'is-config': isRepeat,
+                },
+                'footer-btn'
+              )}
             >
               <FontAwesomeIcon icon={faRepeat} />
             </button>
@@ -414,17 +422,17 @@ function Footer() {
       </div>
       <div className={cx('devices')}>
         <Tippy content="Enable repeat" delay={200}>
-          <button type="button">
+          <button type="button" className={cx('footer-btn')}>
             <LyricsIcon />
           </button>
         </Tippy>
         <Tippy content="Queue" delay={200}>
-          <button type="button">
+          <button type="button" className={cx('footer-btn')}>
             <QueueIcon />
           </button>
         </Tippy>
         <Tippy content="Connect to a device" delay={200}>
-          <button type="button">
+          <button type="button" className={cx('footer-btn')}>
             <ConnectToDeviceIcon />
           </button>
         </Tippy>
@@ -432,6 +440,7 @@ function Footer() {
           {isMuted ? (
             <Tippy content="Unmute" delay={200}>
               <button
+                className={cx('footer-btn')}
                 type="button"
                 onClick={() => handleEventsSong.handleToggleMuted()}
               >
@@ -441,6 +450,7 @@ function Footer() {
           ) : (
             <Tippy content="Mute" delay={200}>
               <button
+                className={cx('footer-btn')}
                 type="button"
                 onClick={() => handleEventsSong.handleToggleMuted()}
               >

@@ -22,4 +22,5 @@ export const publicRoutes = [
   { path: '/collection/tracks', component: LikedSongs, exact: false },
 
   { path: '/login', component: Login, layout: CoverLayout, exact: false },
+  { path: '/login', component: Login, layout: CoverLayout, exact: false },
 ];

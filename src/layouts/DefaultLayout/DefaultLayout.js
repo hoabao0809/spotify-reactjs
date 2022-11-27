@@ -17,9 +17,7 @@ function DefaultLayout({ path, children }) {
   useEffect(() => {
     if (!accessToken) {
       navigate('/login');
-    }
-
-    if (Date.now() > JSON.parse(accessToken).expires_in) {
+    } else if (Date.now() > JSON.parse(accessToken).expires_in) {
       localStorage.removeItem('accessToken');
       navigate('/login');
     }

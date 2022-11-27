@@ -7,3 +7,4 @@ export { default as playlistApi } from './playlist';
 export { default as personalization } from './personalization';
 export { default as showApi } from './show';
 export { default as episodeApi } from './episode';
+export { default as userApi } from './user';

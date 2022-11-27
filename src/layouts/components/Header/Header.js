@@ -1,19 +1,86 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAngleLeft,
+  faAngleRight,
+  faCaretDown,
+  faExternalLink,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Header.module.scss';
 import history from 'history/browser';
 
 import { SearchBar, PlaylistBar } from './components/index';
 import Button from '~/components/Button';
+import { userApi } from '~/api';
+import { Menu } from '~/layouts/components/Header/components';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsToggleUser, toggleUser } from '~/store/reducers/user';
 
 const cx = classNames.bind(styles);
 const $ = document.querySelector.bind(document);
 
+const MENU_ITEMS = [
+  {
+    icon: <FontAwesomeIcon icon={faExternalLink} />,
+    title: 'Account',
+    href: 'https://www.spotify.com/us/account/overview/?utm_source=spotify&utm_medium=menu&utm_campaign=your_account',
+  },
+  {
+    icon: null,
+    title: 'Profile',
+    to: '/',
+  },
+  {
+    icon: <FontAwesomeIcon icon={faExternalLink} />,
+    title: 'Upgrade to Premium',
+    href: 'https://www.spotify.com/us/premium/',
+  },
+  {
+    icon: <FontAwesomeIcon icon={faExternalLink} />,
+    title: 'Support',
+    href: 'https://support.spotify.com/us/',
+  },
+  {
+    icon: <FontAwesomeIcon icon={faExternalLink} />,
+    title: 'Download',
+    href: 'https://www.spotify.com/us/download/windows/',
+  },
+  {
+    icon: null,
+    title: 'Settings',
+    to: 'Log out',
+  },
+  {
+    icon: null,
+    title: 'Log out',
+    to: '/',
+    onClick: () => {
+      localStorage.removeItem('accessToken');
+    },
+    separate: true,
+  },
+];
+
 function Header({ path }) {
+  const [currentUser, setCurrentUser] = useState();
   const headerRef = useRef();
+  const dispatch = useDispatch();
+  const { isToggleUser } = useSelector(selectIsToggleUser);
+
   let PathRenderComp;
+
+  console.log(isToggleUser);
+
+  useEffect(() => {
+    userApi.getCurrentUserProfile().then((response) => {
+      if (response) {
+        setCurrentUser(response);
+      }
+    });
+
+    return () => {};
+  }, []);
 
   useEffect(() => {
     const rightPaneEle = $('#rightPane');
@@ -38,8 +105,20 @@ function Header({ path }) {
     PathRenderComp = PlaylistBar;
   }
 
+  const handleToggleUser = () => {
+    if (isToggleUser) {
+      dispatch(toggleUser({ isToggleUser: false }));
+      document.querySelector('#tippy-1').style.display = 'none';
+    } else {
+      dispatch(toggleUser({ isToggleUser: true }));
+      if (document.querySelector('#tippy-1')) {
+        document.querySelector('#tippy-1').style.display = 'block';
+      }
+    }
+  };
+
   return (
-    <div id='header' ref={headerRef} className={cx('wrapper')} >
+    <div id="header" ref={headerRef} className={cx('wrapper')}>
       <div className={cx('container')}>
         <div className={cx('breadcrumbs')}>
           <FontAwesomeIcon
@@ -73,9 +152,24 @@ function Header({ path }) {
           </div>
 
           <div className={cx('btn-user')}>
-            <Button to="" primary>
-              Hoa Dou
-            </Button>
+            <Menu items={MENU_ITEMS} isToggleUser>
+              <div
+                className={cx('menu-wrapper')}
+                onClick={() => handleToggleUser()}
+              >
+                <div className={cx('menu-img')}>
+                  <img
+                    src={currentUser?.images[0]?.url}
+                    alt="avatar"
+                    className={cx('user-img')}
+                  />
+                </div>
+                <div className={cx('menu-content')}>
+                  <span>{currentUser?.display_name}</span>
+                  <FontAwesomeIcon icon={faCaretDown} />
+                </div>
+              </div>
+            </Menu>
           </div>
         </div>
       </div>
