@@ -93,6 +93,36 @@ function Footer() {
   };
 
   const handleEventsSong = {
+    handlePlay: async function () {
+      if (audioRef?.current.paused && !isPlaying) {
+        return audioRef?.current
+          .play()
+          .then(() => {
+            dispatch(
+              setIsPlaying({
+                isPlaying: true,
+                idPlayingTrack: currentSong?.id,
+                indexPlayingTrack,
+                idPlayingPlaylist,
+              })
+            );
+          })
+          .catch((err) => console.log(err));
+      }
+    },
+    handlePause() {
+      if (isPlaying) {
+        audioRef?.current.pause();
+        dispatch(
+          setIsPlaying({
+            isPlaying: false,
+            idPlayingTrack: currentSong?.id,
+            indexPlayingTrack,
+            idPlayingPlaylist,
+          })
+        );
+      }
+    },
     handleMusic(_isPlaying) {
       if (_isPlaying) {
         dispatch(
@@ -358,7 +388,7 @@ function Footer() {
             <Tippy content="Pause" delay={200}>
               <button
                 className={cx('play-btn', 'footer-btn')}
-                onClick={() => handleEventsSong.handleMusic(false)}
+                onClick={() => handleEventsSong.handlePause()}
               >
                 <FontAwesomeIcon id="pauseBtn" icon={faPause} />
               </button>
@@ -368,7 +398,7 @@ function Footer() {
               <button
                 ref={btnPlayRef}
                 className={cx('play-btn', 'footer-btn')}
-                onClick={() => handleEventsSong.handleMusic(true)}
+                onClick={() => handleEventsSong.handlePlay()}
               >
                 <FontAwesomeIcon
                   id="playBtn"
@@ -481,9 +511,11 @@ function Footer() {
         // allow="autoplay"
         ref={audioRef}
         src={
-          preview_url 
+          preview_url
           // ?? 'https://data51.chiasenhac.com/downloads/1006/0/1005888-c2b49777/128/Rhythm%20Of%20The%20Rain%20-%20Cascades.mp3'
         }
+        // onPlay={() => handleEventsSong.handleOnPlay()}
+        // onPause={() => handleEventsSong.handleOnPause()}
         onTimeUpdate={() => handleEventsSong.handleOnTimeUpdate()}
         onEnded={() => handleEventsSong.handleOnEnded()}
         onVolumeChange={() => handleEventsSong.handleVolumeChange()}

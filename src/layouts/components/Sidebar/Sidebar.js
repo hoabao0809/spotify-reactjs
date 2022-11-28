@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import styles from './Sidebar.module.scss';
@@ -28,8 +28,6 @@ function Sidebar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const { keyword } = useParams();
-  // const paramSearch = keyword ? `/${keyword}` : '/browse';
   const playlists = useSelector(selectPlaylists).playlists;
 
   useEffect(() => {
@@ -87,7 +85,7 @@ function Sidebar() {
           <Menu>
             <MenuItem
               title="Create Playlist"
-              to={config.routes.likedSongs}
+              to={config.routes.createPlaylist}
               icon={<CreatePlaylistIcon className={cx('create-playlist')} />}
               activeIcon={
                 <CreatePlaylistIcon className={cx('create-playlist')} />

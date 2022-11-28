@@ -1,20 +1,20 @@
 import React from 'react';
-import styles from './LikedSongs.module.scss';
+import styles from './CreatePlaylist.module.scss';
 import classNames from 'classnames/bind';
 
 import { MainViewWrapper, EndingSeparation } from '~/pages/components';
 
 const cx = classNames.bind(styles);
 
-function LikedSongs() {
+function CreatePlaylist() {
   return (
     <MainViewWrapper className={cx('custom-wrapper')}>
       <div>
-        <h1>Liked Songs</h1>
+        <h1>Create Playlist</h1>
       </div>
       <EndingSeparation />
     </MainViewWrapper>
   );
 }
 
-export default LikedSongs;
+export default CreatePlaylist;

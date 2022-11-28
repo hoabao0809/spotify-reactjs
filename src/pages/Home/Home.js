@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 function Home() {
   const dispatch = useDispatch();
   const userTopItems = useSelector(selectTopUserItems);
-  // const pane1Width = document.querySelector('.Pane1')?.style.width; // Nghiên cứu sau, khi resize thì splice array 5 items
+  const hour = new Date().getHours();
 
   useEffect(() => {
     dispatch(fetchTopUserItems());
@@ -27,7 +27,10 @@ function Home() {
   return (
     <MainViewWrapper className={cx('custom-wrapper')}>
       <div className={cx('greet')}>
-        <h4>Good evening</h4>
+        <h2>
+          Good{' '}
+          {(hour < 12 && 'Morning') || (hour < 18 && 'Afternoon') || 'Evening'}
+        </h2>
       </div>
       <div className={cx('top-content')}>
         {userTopItems.slice(0, 6)?.map((topItem, index) => (
@@ -38,7 +41,7 @@ function Home() {
       <div className={cx('category-wrapper')}>
         <div className={cx('title')}>
           <Link>
-            <h2>Title</h2>
+            <h2>Jump back in</h2>
           </Link>
           <Link>
             <span>SEE ALL</span>
@@ -50,16 +53,6 @@ function Home() {
           ))}
         </div>
       </div>
-
-      {/* List part */}
-
-      {/* list.map(item => {
-          h4. title
-          seeAll
-          <Card squareImg roundImg to /> 
-        })
-            * asda
-           */}
 
       <EndingSeparation />
     </MainViewWrapper>

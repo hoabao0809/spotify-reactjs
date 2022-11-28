@@ -63,12 +63,14 @@ function UserPlaylist() {
         const { b, g, r } = dominantImgColor;
         const bgColor = `rgb(${r},${g},${b})`;
 
-        $('#linear-gradient').style.backgroundColor = bgColor;
-        $('#linear-gradient').style.backgroundImage =
-          'linear-gradient(rgba(0, 0, 0, 0.3) 0, var(--background-base) 100%), var(--background-noise)';
-        $('#linear-gradient').style.height = '90%';
-        topContainerEle.style.background = `rgb(${r},${g},${b}),0.28`;
-        setDominantColor(bgColor);
+        if ($('#linear-gradient')) {
+          $('#linear-gradient').style.backgroundColor = bgColor;
+          $('#linear-gradient').style.backgroundImage =
+            'linear-gradient(rgba(0, 0, 0, 0.3) 0, var(--background-base) 100%), var(--background-noise)';
+          $('#linear-gradient').style.height = '90%';
+          topContainerEle.style.background = `rgb(${r},${g},${b}),0.28`;
+          setDominantColor(bgColor);
+        }
       };
     }
 
@@ -81,10 +83,11 @@ function UserPlaylist() {
 
   const handlePlayPlaylist = (playingMode) => {
     if (playlist?.tracks?.items) {
-      if (playingMode && indexPlayingTrack === 0) {
-        const tracks = playlist?.tracks?.items?.reduce((prev, next) => {
-          return [...prev, next.track];
-        }, []);
+      const tracks = playlist?.tracks?.items?.reduce((prev, next) => {
+        return [...prev, next.track];
+      }, []);
+
+      if (idPlayingPlaylist !== playlist?.id) {
         dispatch(addTracksToState(tracks));
         dispatch(
           setIsPlaying({
@@ -94,18 +97,36 @@ function UserPlaylist() {
             idPlayingPlaylist: playlist.id,
           })
         );
-      } else if (playingMode && indexPlayingTrack > 0) {
-        dispatch(
-          setIsPlaying({ isPlaying: true, idPlayingTrack, indexPlayingTrack })
-        );
       } else {
-        dispatch(
-          setIsPlaying({
-            isPlaying: false,
-            idPlayingTrack,
-            indexPlayingTrack,
-          })
-        );
+        if (playingMode && indexPlayingTrack === 0) {
+          dispatch(addTracksToState(tracks));
+          dispatch(
+            setIsPlaying({
+              isPlaying: true,
+              idPlayingTrack: playlist?.tracks?.items[0]?.track?.id,
+              indexPlayingTrack: 0,
+              idPlayingPlaylist: playlist.id,
+            })
+          );
+        } else if (playingMode && indexPlayingTrack > 0) {
+          dispatch(
+            setIsPlaying({
+              isPlaying: true,
+              idPlayingTrack,
+              indexPlayingTrack,
+              idPlayingPlaylist: playlist.id,
+            })
+          );
+        } else {
+          dispatch(
+            setIsPlaying({
+              isPlaying: false,
+              idPlayingTrack,
+              indexPlayingTrack,
+              idPlayingPlaylist: playlist.id,
+            })
+          );
+        }
       }
     }
   };

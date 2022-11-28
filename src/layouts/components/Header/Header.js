@@ -49,7 +49,7 @@ const MENU_ITEMS = [
   {
     icon: null,
     title: 'Settings',
-    to: 'Log out',
+    to: '/',
   },
   {
     icon: null,
@@ -100,6 +100,8 @@ function Header({ path }) {
   } else if (path.includes('/playlist')) {
     PathRenderComp = PlaylistBar;
   } else if (path.includes('/collection/playlists')) {
+    PathRenderComp = PlaylistBar;
+  } else {
     PathRenderComp = PlaylistBar;
   }
 
