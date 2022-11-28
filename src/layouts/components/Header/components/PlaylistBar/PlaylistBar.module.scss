@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  opacity: 0;
+  transition: var(--transition);
+
+  &:hover {
+    .play-btn {
+      transform: scale(1.02) !important;
+    }
+
+    .play-btn {
+      color: #000;
+    }
+  }
+}
+
+.play-btn {
+  color: #000;
+}
+
+.name {
+  font-size: 24px;
+}

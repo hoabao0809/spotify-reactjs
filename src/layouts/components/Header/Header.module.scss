@@ -42,11 +42,11 @@
 }
 
 .path-render {
-  width: 30%;
+  width: 65%;
 }
 
 .header-buttons {
-  width: 60%;
+  width: 25%;
   display: flex;
   justify-content: flex-end;
 }
@@ -55,7 +55,7 @@
   position: relative;
   display: flex;
   column-gap: var(--gap);
-  padding-right: calc(var(--gap) * 1.5);
+  padding-right: calc(var(--gap));
 
   &::after {
     content: '';
@@ -71,25 +71,9 @@
 .btn-user {
   display: flex;
   column-gap: var(--gap);
-  padding-left: calc(var(--gap) * 1.5);
+  padding-left: calc(var(--gap));
   align-items: center;
 }
-
-//@at-root
-
-// .menu-wrapper {
-//   font-size: var(--btn-font-size);
-//   display: flex;
-//   justify-content: center;
-//   border-radius: 500px;
-//   min-block-size: 48px;
-//   -webkit-tap-highlight-color: transparent;
-//   align-items: center;
-
-//   &:focus-visible {
-//     outline: none;
-//   }
-// }
 
 .menu-wrapper {
   color: var(--text-base);

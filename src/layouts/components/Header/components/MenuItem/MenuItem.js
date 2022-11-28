@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 
 function MenuItem({ data, ...props }) {
   const classes = cx('menu-item', {
-    separate: data.separate,
+    separate: data.separate === 'true',
   });
   return (
     <Button {...props} text className={classes}>

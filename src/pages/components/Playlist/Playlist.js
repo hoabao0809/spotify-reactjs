@@ -20,16 +20,24 @@ function Playlist({ playlist, dominantColor, ...props }) {
     const rightPaneEle = $('#rightPane');
     const headerEle = $('#header');
     const tableHeader = tableHeaderRef.current;
+    const playlistBar = $('#playlist_bar');
+
     rightPaneEle.addEventListener('scroll', () => {
       if (rightPaneEle.scrollTop > 400) {
         tableHeader.style.background = 'var(--background-base)';
         headerEle.style.background = dominantColor;
         headerEle.style.backgroundImage =
           'linear-gradient(rgba(0, 0, 0, 0.2) 0,rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.2) 100%)';
+        if (playlistBar) {
+          playlistBar.style.opacity = 1;
+        }
       } else {
         tableHeader.style.background = 'none';
         headerEle.style.background = 'transparent';
         headerEle.style.backgroundImage = 'none';
+        if (playlistBar) {
+          playlistBar.style.opacity = 0;
+        }
       }
     });
 

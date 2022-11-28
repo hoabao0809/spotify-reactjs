@@ -58,7 +58,7 @@ const MENU_ITEMS = [
     onClick: () => {
       localStorage.removeItem('accessToken');
     },
-    separate: true,
+    separate: 'true',
   },
 ];
 
@@ -69,8 +69,6 @@ function Header({ path }) {
   const { isToggleUser } = useSelector(selectIsToggleUser);
 
   let PathRenderComp;
-
-  console.log(isToggleUser);
 
   useEffect(() => {
     userApi.getCurrentUserProfile().then((response) => {

@@ -30,7 +30,7 @@ function UserPlaylist() {
   const { idPlaylist } = useParams('idPlaylist');
   const dispatch = useDispatch();
   const playlist = useSelector(selectPlaylists).playlist;
-  const { isPlaying, idPlayingTrack, indexPlayingTrack } =
+  const { isPlaying, idPlayingTrack, indexPlayingTrack, idPlayingPlaylist } =
     useSelector(selectIsPlayingTrack);
 
   const playlistName = useRef();
@@ -73,7 +73,9 @@ function UserPlaylist() {
     }
 
     return () => {
-      $('#linear-gradient').style.height = '332px';
+      if ($('#linear-gradient')) {
+        $('#linear-gradient').style.height = '332px';
+      }
     };
   }, [idPlaylist, playlist?.name]);
 
@@ -89,6 +91,7 @@ function UserPlaylist() {
             isPlaying: true,
             idPlayingTrack: playlist?.tracks?.items[0]?.track?.id,
             indexPlayingTrack: 0,
+            idPlayingPlaylist: playlist.id,
           })
         );
       } else if (playingMode && indexPlayingTrack > 0) {
@@ -149,7 +152,7 @@ function UserPlaylist() {
 
       <div className={cx('songs-container')}>
         <div className={cx('play-section')}>
-          {isPlaying ? (
+          {isPlaying && idPlayingPlaylist === playlist?.id ? (
             <Button
               play
               className={cx('play-btn')}
