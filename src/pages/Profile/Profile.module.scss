@@ -1,0 +1,168 @@
+.custom-wrapper {
+  width: 100% !important;
+}
+
+.cover-img {
+  background-image: url(https://scontent.fsgn4-1.fna.fbcdn.net/v/t1.15752-9/316693951_717398560001453_3800993431253249009_n.jpg?stp=dst-jpg_p1080x2048&_nc_cat=103&ccb=1-7&_nc_sid=ae9488&_nc_ohc=j6CKrvapuvgAX-MQ_KP&tn=GWg_uu6i9oj3lVu2&_nc_ht=scontent.fsgn4-1.fna&oh=03_AdSwePa5BZyT1WBmVhRik6O3IVaGiprUmK45To9u83EVIQ&oe=63AC4E8C);
+  background-repeat: no-repeat;
+  background-position: 0 30%;
+  background-size: cover;
+  width: 100%;
+  height: 400px;
+  position: relative;
+}
+
+.top-container {
+  background: transparent;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  // backdrop-filter: blur(10px);
+  z-index: 5;
+}
+
+.top-content {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  width: 95%;
+  margin: auto;
+  padding-bottom: 2rem;
+  position: absolute;
+  bottom: 1rem;
+  left: 3rem;
+}
+
+.verified-parent {
+  display: flex;
+  margin-bottom: 0.2em;
+  justify-content: flex-start;
+
+  align-items: center;
+}
+
+.verified-symbol {
+  width: 1.46em;
+}
+
+.heading-2 {
+  height: 100%;
+  margin-top: 0.1em;
+  margin-bottom: 0px;
+  margin-left: 0.4em;
+  color: #fff;
+  font-size: 0.87em;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.name-heading {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #fff;
+  font-size: 2em;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.08em;
+  text-shadow: 3px 3px grey;
+}
+
+.heading-title {
+  margin-top: 1em;
+  margin-bottom: 0px;
+  color: #fff;
+  font-size: 1.25em;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--text-sidebar);
+}
+
+.job-title {
+  margin-left: 1rem;
+  text-shadow: 1px 1px #fff;
+}
+
+.details-container {
+  width: 95%;
+  margin: auto;
+}
+
+.interaction-section {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.like-btn,
+.unlike-btn {
+  width: 55px;
+  height: 55px;
+  opacity: 1;
+}
+
+.like-icon,
+.unlike-icon {
+  font-size: 1.5em;
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.like-btn {
+  color: #f81348;
+  animation: like 0.3s ease-in forwards;
+  background: #f813482b;
+}
+.unlike-btn {
+  animation: unlike 0.17s ease-in reverse forwards;
+  border-radius: 50%;
+
+  &:hover {
+    background: #43434338;
+  }
+}
+@keyframes like {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes unlike {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.following-btn {
+  opacity: 1;
+  padding: 0.5rem 1.25rem;
+  border: 1.5px solid #fff;
+  width: unset;
+  height: unset;
+  border-radius: 555px;
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  &.followed {
+    background: #1ed760;
+    color: #fff;
+    border: none;
+  }
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.options {
+  font-size: 1.5em;
+}

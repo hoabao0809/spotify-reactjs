@@ -33,7 +33,7 @@ function Home() {
         </h2>
       </div>
       <div className={cx('top-content')}>
-        {userTopItems.slice(0, 6)?.map((topItem, index) => (
+        {userTopItems.slice(1, 7)?.map((topItem, index) => (
           <TopItem key={index} topItem={topItem} />
         ))}
       </div>
@@ -48,7 +48,7 @@ function Home() {
           </Link>
         </div>
         <div className={cx('category-container')}>
-          {userTopItems.slice(0, 6)?.map((item, index) => (
+          {userTopItems.slice(1, 7)?.map((item, index) => (
             <Card key={index} item={item} roundImg />
           ))}
         </div>

@@ -38,7 +38,6 @@ function Button({
     text,
     play,
   });
-
   return (
     <Comp className={classes} {...props} onClick={onClick}>
       {children}

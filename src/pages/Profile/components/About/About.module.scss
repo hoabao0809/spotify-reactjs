@@ -1,0 +1,87 @@
+.wrapper {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.about-container {
+  position: relative;
+
+  width: 60%;
+}
+
+.about-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.8rem;
+
+  p {
+    letter-spacing: 0.3rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.education-container {
+  width: 35%;
+}
+
+.education-content {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.education-box {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.28em;
+  background-color: #2a2a2a;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.8rem;
+}
+
+.edu-month {
+  padding-top: 0.4em;
+  padding-bottom: 0.63em;
+  font-size: 0.73em;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.edu-year {
+  font-size: 1.39em;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.edu-text {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.edu-institute {
+  font-size: 1em;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.edu-course {
+  margin-top: 0.83em;
+  margin-bottom: 0px;
+  color: #b3b3b3;
+  font-size: 0.9em;
+  line-height: 1;
+  font-weight: 500;
+}

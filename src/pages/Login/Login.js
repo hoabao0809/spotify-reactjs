@@ -16,6 +16,8 @@ const cx = classNames.bind(styles);
 const SCOPE =
   'user-read-playback-state user-modify-playback-state user-read-currently-playing user-top-read user-follow-read playlist-read-private user-library-read';
 const REDIRECT_URI = 'http://localhost:3000/login';
+// const REDIRECT_URI = 'https://spotify-ui-reactjs.web.app/login';
+
 const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const ACCESS_TOKEN = 'accessToken';
 const URL = `https://accounts.spotify.com/authorize?response_type=token&client_id=${CLIENT_ID}&scope=${SCOPE}&redirect_uri=${REDIRECT_URI}&show_dialog=true`;

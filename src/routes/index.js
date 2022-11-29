@@ -9,6 +9,7 @@ import Login from '~/pages/Login';
 import UserPlaylist from '~/pages/UserPlaylist';
 import LikedSongs from '~/pages/LikedSongs';
 import CreatePlaylist from '~/pages/CreatePlaylist';
+import Profile from '~/pages/Profile';
 
 export const publicRoutes = [
   { path: '/', component: Home, exact: true },
@@ -24,4 +25,5 @@ export const publicRoutes = [
   { path: '/collection/tracks', component: LikedSongs, exact: false },
 
   { path: '/login', component: Login, layout: CoverLayout, exact: false },
+  { path: '/profile', component: Profile, exact: true },
 ];

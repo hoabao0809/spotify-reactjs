@@ -1,0 +1,23 @@
+.wrapper {
+  margin-top: 4rem;
+  display: flex;
+
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.experience-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.experience-card {
+  padding-top: 0.97em;
+  padding-right: 0.97px;
+  padding-left: 0.97em;
+  border-radius: 0.28em;
+  background-color: #181818;
+}

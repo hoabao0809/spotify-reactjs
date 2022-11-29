@@ -29,7 +29,7 @@ const MENU_ITEMS = [
   {
     icon: null,
     title: 'Profile',
-    to: '/',
+    to: '/profile',
   },
   {
     icon: <FontAwesomeIcon icon={faExternalLink} />,

@@ -167,3 +167,12 @@ html *::-webkit-scrollbar-track {
   background: var(--background-base);
   transition: var(--transition);
 }
+
+#tsparticles {
+  height: 400px;
+
+}
+
+canvas {
+  border-radius: 8px;
+}
