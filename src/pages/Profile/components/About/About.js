@@ -16,10 +16,10 @@ function About() {
           <div className={cx('about-item')}>
             <p>Hi, I am Bao Hoa.</p>
 
+            <p>I am a developer who is highly interested in JavaScript.</p>
             <p>
-              I am a developer who is highly interested in JavaScript. My tech
-              stack has been full-stack JS such as React, Angular with
-              TypeScript and NestJS.
+              My tech stack has been full-stack JS such as React, Angular with
+              Javascript and TypeScript.
             </p>
           </div>
         </div>

@@ -70,8 +70,12 @@ function TopArtist() {
                 >
                   Email
                 </Button>
-                <Button text className={cx('contact--item')}>
-                  Linkedin
+                <Button
+                  href="https://drive.google.com/file/d/1Yi6MaFljQ239vJtssLzDk9Wb-6bka83A/view?usp=share_link"
+                  text
+                  className={cx('contact--item')}
+                >
+                  My CV
                 </Button>
               </div>
             </div>

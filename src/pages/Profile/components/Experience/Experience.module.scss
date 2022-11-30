@@ -12,6 +12,7 @@
 .experience-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
 }
 
 .experience-card {
@@ -20,4 +21,46 @@
   padding-left: 0.97em;
   border-radius: 0.28em;
   background-color: #181818;
+}
+
+.experience-header-copy {
+  margin-top: 0em;
+  margin-bottom: 0.6em;
+  color: #fff;
+  font-size: 1.46em;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.work-dates {
+  margin-top: 0em;
+  margin-bottom: 1.5em;
+  color: #b0b0b0;
+  font-size: 0.73em;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+.heart-bullet {
+  display: flex;
+  margin-bottom: 1.18em;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.heart-bullet-child {
+  width: 0.83em;
+  margin-top: 0.15em;
+  margin-right: 0.49em;
+}
+
+.bullet-text {
+  margin-top: 0em;
+  margin-bottom: 0em;
+  color: #b0b0b0;
+  font-size: 0.9em;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: -0.04em;
 }
