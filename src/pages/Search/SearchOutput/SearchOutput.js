@@ -3,7 +3,7 @@ import styles from './SearchOutput.module.scss';
 import classNames from 'classnames/bind';
 import { useParams } from 'react-router-dom';
 
-import { MainViewWrapper, EndingSeparation } from '~/pages/components';
+import { MainViewWrapper, EndingSeparation } from '~/pages/_components';
 import config from '~/config';
 import { SearchNavItem, SearchAll } from '~/pages/Search';
 import { addType, selectSearchState } from '~/store/reducers/search';

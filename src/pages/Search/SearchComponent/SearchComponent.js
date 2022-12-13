@@ -11,7 +11,7 @@ import { useDebounce } from '~/hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSearch } from '~/store/actionsCreator/search';
 import { selectSearchResult, addSearchResult } from '~/store/reducers/search';
-import RowSixSongs from '~/components/RowSixSongs';
+import { RowSixSongs } from '~/components';
 
 const cx = classNames.bind(styles);
 
@@ -41,3 +41,5 @@ function SearchComponent({ keyword, searchType, ...props }) {
 }
 
 export default SearchComponent;
+
+

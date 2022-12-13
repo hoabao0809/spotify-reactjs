@@ -1,0 +1,26 @@
+.play-section {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.play-btn {
+  width: 56px;
+  height: 56px;
+
+  .play-icon {
+    color: #000;
+    font-size: 1.5em;
+    // transform: translateX(2px);
+  }
+}
+
+.like-btn svg {
+  color: #1ed760;
+}
+
+.options svg {
+  width: 32px;
+  height: 32px;
+}

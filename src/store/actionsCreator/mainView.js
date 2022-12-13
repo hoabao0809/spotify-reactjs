@@ -3,6 +3,7 @@ import { playlistApi } from '~/api';
 import { addPlaylist } from '~/store/reducers/playlists';
 
 export const fetchPlaylist = (idPlaylist) => {
+  console.log(idPlaylist)
   return (dispatch) => {
     playlistApi
       .getPlaylist(idPlaylist)

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styles from './Projects.module.scss';
 import classNames from 'classnames/bind';
 import ProjectCard from '../ProjectCard/ProjectCard';

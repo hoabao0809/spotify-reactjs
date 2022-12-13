@@ -11,7 +11,7 @@ import styles from './Header.module.scss';
 import history from 'history/browser';
 
 import { SearchBar, PlaylistBar } from './components/index';
-import Button from '~/components/Button';
+import { Button } from '~/components';
 import { userApi } from '~/api';
 import { Menu } from '~/layouts/components/Header/components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -162,6 +162,7 @@ function Header({ path }) {
                     src={currentUser?.images[0]?.url}
                     alt="avatar"
                     className={cx('user-img')}
+                    loading="lazy"
                   />
                 </div>
                 <div className={cx('menu-content')}>

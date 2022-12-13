@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClockFour } from '@fortawesome/free-regular-svg-icons';
 
 import styles from './Playlist.module.scss';
-import { RowSong } from '~/pages/components';
+import { RowSong } from '~/pages/_components';
 
 const cx = classNames.bind(styles);
 const $ = document.querySelector.bind(document);

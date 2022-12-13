@@ -1,15 +1,18 @@
 // Layouts
 import { CoverLayout } from '~/layouts';
 
-import YourLibrary from '~/pages/YourLibrary';
-
-import { SearchBrowse, SearchOutput } from '~/pages/Search';
-import Home from '~/pages/Home';
-import Login from '~/pages/Login';
-import UserPlaylist from '~/pages/UserPlaylist';
-import LikedSongs from '~/pages/LikedSongs';
-import CreatePlaylist from '~/pages/CreatePlaylist';
-import Profile from '~/pages/Profile';
+import {
+  YourLibrary,
+  Home,
+  Login,
+  UserPlaylist,
+  LikedSongs,
+  CreatePlaylist,
+  Profile,
+  Artist,
+  SearchBrowse,
+  SearchOutput,
+} from '~/pages';
 
 export const publicRoutes = [
   { path: '/', component: Home, exact: true },
@@ -21,6 +24,7 @@ export const publicRoutes = [
   { path: '/collection/playlists', component: YourLibrary, exact: false },
   // { path: '/playlist', component: CreatePlaylist, exact: true },
   { path: '/playlist/:idPlaylist', component: UserPlaylist, exact: false },
+  { path: '/artist/:idArtist', component: Artist, exact: false },
   { path: '/createPlaylist', component: CreatePlaylist, exact: false },
   { path: '/collection/tracks', component: LikedSongs, exact: false },
 

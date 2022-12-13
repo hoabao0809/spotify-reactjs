@@ -6,7 +6,7 @@
 import React, { memo } from 'react';
 import styles from './RowSixSongs.module.scss';
 import classNames from 'classnames/bind';
-import Card from '~/components/Card';
+import { Card } from '~/components';
 
 const cx = classNames.bind(styles);
 

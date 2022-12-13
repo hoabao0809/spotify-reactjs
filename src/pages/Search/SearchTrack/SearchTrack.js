@@ -6,7 +6,7 @@ import { useDebounce } from '~/hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSearch } from '~/store/actionsCreator/search';
 import { selectSearchResult, addSearchResult } from '~/store/reducers/search';
-import { Playlist } from '~/pages/components';
+import { Playlist } from '~/pages/_components';
 
 const cx = classNames.bind(styles);
 

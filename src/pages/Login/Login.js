@@ -8,7 +8,7 @@
 import React, { useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
-import Button from '~/components/Button';
+import { Button } from '~/components';
 import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);

@@ -19,43 +19,7 @@
   gap: 2rem;
 }
 
-.category-wrapper {
-  margin: 2rem 0;
-
-  .title {
-    display: flex;
-    justify-content: space-between;
-  }
-}
-
-.category-container {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 2rem;
-
-  overflow-x: scroll;
-}
-
-.category-container::-webkit-scrollbar {
-  border-radius: 0px;
-  height: 5px;
-}
-
-.category-container::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background-color: hsla(0, 0%, 100%, 0.3);
-}
-
-.category-container::-webkit-scrollbar-thumb:hover {
-  background: hsla(0, 0%, 100%, 0.5);
-  transition: all 0.2s ease-in;
-}
-
-.category-container::-webkit-scrollbar-track {
-  border-radius: 0;
-  background-color: rgba(0, 0, 0, 0);
-}
-
-.greet, .title {
+.greet,
+.title {
   padding-bottom: 1em;
 }

@@ -50,6 +50,16 @@
   }
 }
 
+.pureText {
+  font-size: 1em;
+  font-weight: 700;
+
+  &:hover {
+    transform: initial;
+    text-decoration: underline;
+  }
+}
+
 .play {
   background-color: #1ed760;
 

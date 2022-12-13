@@ -1,9 +1,8 @@
 import React, { memo } from 'react';
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
 
 import styles from './ProjectCard.module.scss';
-import Button from '~/components/Button';
+import { Button } from '~/components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
 import { truncate } from '~/utils';
@@ -20,7 +19,7 @@ function ProjectCard({ item, href, horizontal, className, to, ...passProps }) {
     <div className={classes} {...passProps}>
       <div className={cx('container')}>
         <div className={cx('image-container')}>
-          <img className={cx('image')} src={item.image} alt="" />
+          <img className={cx('image')} src={item.image} alt="" loading="lazy" />
 
           <Button play className={cx('play-btn')} href={href}>
             <FontAwesomeIcon className={cx('play-icon')} icon={faCode} />

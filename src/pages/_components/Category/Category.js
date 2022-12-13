@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styles from './Category.module.scss';
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
 function Category({ category }) {
-  const { icons, name, id } = category;
+  const { icons, name } = category;
   let randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
   return (

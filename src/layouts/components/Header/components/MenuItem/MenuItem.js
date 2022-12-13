@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './MenuItem.module.scss';
 import classNames from 'classnames/bind';
-import Button from '~/components/Button';
+import { Button } from '~/components';
 
 const cx = classNames.bind(styles);
 

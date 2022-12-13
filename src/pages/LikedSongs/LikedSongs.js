@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './LikedSongs.module.scss';
 import classNames from 'classnames/bind';
 
-import { MainViewWrapper, EndingSeparation } from '~/pages/components';
+import { MainViewWrapper, EndingSeparation } from '~/pages/_components';
 
 const cx = classNames.bind(styles);
 

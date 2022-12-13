@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import styles from './Profile.module.scss';
 import classNames from 'classnames/bind';
 
-import { MainViewWrapper, EndingSeparation } from '~/pages/components';
+import { MainViewWrapper, EndingSeparation } from '~/pages/_components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEllipsis,
   faHeart,
   faKeyboard,
 } from '@fortawesome/free-solid-svg-icons';
-import Button from '~/components/Button';
-import { TopArtist, Projects, About, Experience } from './components';
+import { Button } from '~/components';
+import { TopProfile, Projects, About, Experience } from './components';
 
 const cx = classNames.bind(styles);
 const $ = document.querySelector.bind(document);
@@ -99,7 +99,7 @@ function Profile() {
         </div>
 
         {/* Top Artist */}
-        <TopArtist />
+        <TopProfile />
 
         {/* Popular Projects */}
         <Projects />

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
-import styles from './TopArtist.module.scss';
+import styles from './TopProfile.module.scss';
 import { userApi } from '~/api';
-import Button from '~/components/Button';
+import { Button } from '~/components';
 
 import { SKILLS } from '../../data';
 
 const cx = classNames.bind(styles);
 
-function TopArtist() {
+function TopProfile() {
   const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
@@ -32,6 +32,7 @@ function TopArtist() {
               src={currentUser?.images[0]?.url}
               alt="avatar"
               className={cx('image')}
+              loading="lazy"
             />
           </div>
 
@@ -41,6 +42,7 @@ function TopArtist() {
                 <img
                   src={currentUser?.images[0]?.url}
                   alt="avatar"
+                  loading="lazy"
                   className={cx('image')}
                 />
               </div>
@@ -100,4 +102,4 @@ function TopArtist() {
   );
 }
 
-export default TopArtist;
+export default TopProfile;

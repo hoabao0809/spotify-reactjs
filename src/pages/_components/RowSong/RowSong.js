@@ -90,6 +90,7 @@ function RowSong({
               style={{ width: '14px', height: '14px' }}
               src="https://open.spotifycdn.com/cdn/images/equaliser-animated-green.f93a2ef4.gif"
               alt=""
+              loading="lazy"
             />
           ) : (
             index + 1

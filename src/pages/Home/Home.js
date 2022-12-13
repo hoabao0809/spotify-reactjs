@@ -4,8 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import styles from './Home.module.scss';
-import { TopItem, MainViewWrapper, EndingSeparation } from '~/pages/components';
-import Card from '~/components/Card';
+import {
+  TopItem,
+  MainViewWrapper,
+  EndingSeparation,
+} from '~/pages/_components';
+import { Card, RowSixSongs, CategoryWrapper } from '~/components';
 
 import { selectTopUserItems } from '~/store/reducers/personalization';
 import { fetchTopUserItems } from '~/store/actionsCreator/home';
@@ -38,21 +42,9 @@ function Home() {
         ))}
       </div>
 
-      <div className={cx('category-wrapper')}>
-        <div className={cx('title')}>
-          <Link>
-            <h2>Jump back in</h2>
-          </Link>
-          <Link>
-            <span>SEE ALL</span>
-          </Link>
-        </div>
-        <div className={cx('category-container')}>
-          {userTopItems.slice(1, 7)?.map((item, index) => (
-            <Card key={index} item={item} roundImg />
-          ))}
-        </div>
-      </div>
+      <CategoryWrapper title="Jump back in">
+        <RowSixSongs items={userTopItems?.slice(1, 7)} roundImg />
+      </CategoryWrapper>
 
       <EndingSeparation />
     </MainViewWrapper>

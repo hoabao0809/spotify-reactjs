@@ -9,7 +9,7 @@ import {
   Category,
   MainViewWrapper,
   EndingSeparation,
-} from '~/pages/components';
+} from '~/pages/_components';
 
 const cx = classNames.bind(styles);
 

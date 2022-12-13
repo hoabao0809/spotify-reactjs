@@ -8,3 +8,5 @@ export {
   playerConfigReducer,
 } from './player';
 export { default as isToggleUserReducer } from './user';
+export { default as artistReducer } from './artist';
+

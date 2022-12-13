@@ -8,9 +8,9 @@ import {
   MainViewWrapper,
   Playlist,
   EndingSeparation,
-} from '~/pages/components';
+} from '~/pages/_components';
 import { getAverageRGB } from '~/utils';
-import Button from '~/components/Button';
+import { Button } from '~/components';
 
 import styles from './UserPlaylist.module.scss';
 import { LikeFullBgIcon } from '~/components/Icons';

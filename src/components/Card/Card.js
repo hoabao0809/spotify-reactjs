@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './Card.module.scss';
-import Button from '../Button';
+import { Button } from '~/components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { truncate } from '~/utils';
@@ -26,6 +26,7 @@ function Card({
   ...passProps
 }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isPlaying, idPlayingTrack, indexPlayingTrack, idPlayingPlaylist } =
     useSelector(selectIsPlayingTrack);
 
@@ -72,8 +73,14 @@ function Card({
     }
   };
 
+  const handleOnClick = (item) => {
+    if (!item) return;
+    const { id, type } = item;
+    navigate(`/${type}/${id}`);
+  };
+
   return (
-    <Link className={classes} {...passProps}>
+    <div className={classes} {...passProps} onClick={() => handleOnClick(item)}>
       <div className={cx('container')}>
         <div className={cx('image-container')}>
           <img
@@ -84,6 +91,7 @@ function Card({
               fallbackImg
             }
             alt=""
+            loading="lazy"
           />
 
           <Button
@@ -126,7 +134,7 @@ function Card({
           <span className={cx('publisher')}>{item?.publisher}</span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 

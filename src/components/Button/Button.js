@@ -11,6 +11,7 @@ function Button({
   children,
   primary,
   text,
+  pureText,
   play,
   className,
   onClick,
@@ -36,6 +37,7 @@ function Button({
     [className]: className,
     primary,
     text,
+    pureText,
     play,
   });
   return (

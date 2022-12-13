@@ -9,7 +9,7 @@ import {
 } from '~/store/reducers/player';
 
 import styles from './PlaylistBar.module.scss';
-import Button from '~/components/Button';
+import { Button } from '~/components';
 import { selectPlaylists } from '~/store/reducers/playlists';
 import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 

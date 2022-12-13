@@ -9,6 +9,7 @@ import {
   searchResultReducer,
   playerConfigReducer,
   isToggleUserReducer,
+  artistReducer,
 } from './reducers/index';
 
 export const store = configureStore({
@@ -22,5 +23,6 @@ export const store = configureStore({
     searchResult: searchResultReducer,
     playerConfig: playerConfigReducer,
     isToggleUser: isToggleUserReducer,
+    artist: artistReducer,
   },
 });

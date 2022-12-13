@@ -1,0 +1,128 @@
+.custom-wrapper {
+  width: 100% !important;
+}
+
+.cover-img {
+  background-repeat: no-repeat;
+  background-position: 0 30%;
+  background-size: cover;
+  width: 100%;
+  height: 55vh;
+  max-height: none;
+  min-height: 340px;
+  position: relative;
+}
+
+.top-container {
+  background: transparent;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  // backdrop-filter: blur(10px);
+  z-index: 5;
+}
+
+.top-content {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  width: 95%;
+  margin: auto;
+  padding-bottom: 2rem;
+  position: absolute;
+  bottom: 1rem;
+  left: 3rem;
+}
+
+.verified-parent {
+  display: flex;
+  margin-bottom: 0.2em;
+  justify-content: flex-start;
+
+  align-items: center;
+}
+
+.verified-symbol {
+  width: 1.46em;
+}
+
+.heading-2 {
+  height: 100%;
+  margin-top: 0.1em;
+  margin-bottom: 0px;
+  margin-left: 0.4em;
+  color: #fff;
+  font-size: 0.875em;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.name-heading {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #fff;
+  font-size: 3em;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.08em;
+}
+
+.heading-title {
+  margin-top: 1em;
+  margin-bottom: 0px;
+  color: #fff;
+  font-size: 1.25em;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--text-sidebar);
+}
+
+.job-title {
+  margin-left: 1rem;
+  font-size: 1em;
+  line-height: 2;
+  margin-top: 4px;
+  color: #fff;
+}
+
+.artist-container {
+  width: 95%;
+  margin: auto;
+}
+
+.about-container {
+  width: 60%;
+  border-radius: 8px;
+}
+
+.about-img {
+  position: relative;
+  background-color: #282828;
+  background-position: 50% 50%;
+  background-size: cover;
+  border: 0;
+  border-radius: 8px;
+  position: relative;
+  text-align: initial;
+  transform: scale(1);
+  width: 100%;
+  height: 516px;
+  transition: var(--transition);
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 5rem;
+  left: 5rem;
+}
+
+.about-followers {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: 1.5em;
+}
+
+.about-name {
+  font-size: 1.125em;
+  font-weight: 600;
+}

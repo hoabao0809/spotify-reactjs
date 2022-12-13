@@ -4,10 +4,12 @@ import { Fragment } from 'react';
 
 import { publicRoutes } from '~/routes';
 import { DefaultLayout } from '~/layouts';
+import { ScrollToTop } from '~/components';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         {publicRoutes.map((route, index) => {
           const Page = route.component;

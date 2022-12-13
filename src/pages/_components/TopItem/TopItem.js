@@ -1,18 +1,21 @@
 import React, { Fragment } from 'react';
 import styles from './TopItem.module.scss';
 import classNames from 'classnames/bind';
-import Button from '~/components/Button';
+import { Button } from '~/components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { getAverageRGB } from '~/utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTracksToStore } from '~/store/actionsCreator/player';
 import { selectIsPlayingTrack, setIsPlaying } from '~/store/reducers/player';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function TopItem({ topItem }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { isPlaying, idPlayingTrack, indexPlayingTrack, idPlayingPlaylist } =
     useSelector(selectIsPlayingTrack);
 
@@ -27,10 +30,10 @@ function TopItem({ topItem }) {
     document.querySelector('#linear-gradient').style.backgroundColor = bgColor;
   };
 
-  const handlePlayPlaylist = (item, playingMode) => {
-    const { id, type } = item;
+  const handlePlayPlaylist = (playlist, playingMode) => {
+    const { id, type } = playlist;
 
-    if (item) {
+    if (playlist) {
       if (playingMode) {
         dispatch(
           addTracksToStore({ id, type }, (tracks) => {
@@ -57,15 +60,27 @@ function TopItem({ topItem }) {
     }
   };
 
+  const handleOnClick = (item) => {
+    if (!item) return;
+    const { id, type } = item;
+    navigate(`${type}/${id}`);
+  };
+
   return (
     <Fragment>
       <div
         id="topItem"
         className={cx('wrapper')}
         onMouseOver={(e) => handleOnMouseOver(e)}
+        onClick={() => handleOnClick(topItem)}
       >
         <div className={cx('image-container')}>
-          <img className={cx('image')} src={topItem.images[0].url} alt="" />
+          <img
+            className={cx('image')}
+            src={topItem.images[0].url}
+            alt=""
+            loading="lazy"
+          />
         </div>
         <div className={cx('detail')}>
           {topItem.name}
@@ -91,9 +106,6 @@ function TopItem({ topItem }) {
               }
             />
           </Button>
-          {/* <Button play className={cx('button')}>
-            <FontAwesomeIcon icon={faPlay} />
-          </Button> */}
         </div>
       </div>
     </Fragment>

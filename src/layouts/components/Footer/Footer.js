@@ -321,6 +321,7 @@ function Footer() {
               className={cx('image')}
               src={currentSong?.album?.images[0]?.url || fallbackImg}
               alt=""
+              loading="lazy"
             />
             <Tippy content="Expand" delay={200}>
               <button

@@ -8,9 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSearch } from '~/store/actionsCreator/search';
 import { selectSearchResult, addSearchResult } from '~/store/reducers/search';
 
-import Card from '~/components/Card';
-import RowSingleSong from '~/components/RowSingleSong';
-import RowSixSongs from '~/components/RowSixSongs';
+import { Card } from '~/components';
+import { RowSingleSong } from '~/components';
+import { RowSixSongs } from '~/components';
 
 const cx = classNames.bind(styles);
 

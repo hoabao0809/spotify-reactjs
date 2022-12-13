@@ -55,6 +55,7 @@ function Sidebar() {
             src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
             alt="spotify-logo"
             className={cx('logo-img')}
+            loading="lazy"
           />
         </div>
 
@@ -113,7 +114,12 @@ function Sidebar() {
         </div>
       </aside>
       <div id="popup-container" className={cx('popup-container')}>
-        <img id="popup-songImage" className={cx('popup-img')} alt="" />
+        <img
+          id="popup-songImage"
+          className={cx('popup-img')}
+          alt=""
+          loading="lazy"
+        />
         <button
           className={cx('btn-anglePopDown')}
           onClick={() => handleOnClickArrowDown()}

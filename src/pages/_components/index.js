@@ -4,3 +4,6 @@ export { default as Playlist } from './Playlist/Playlist';
 export { default as Category } from './Category/Category';
 export { default as RowSong } from './RowSong/RowSong';
 export { default as EndingSeparation } from './EndingSeparation/EndingSeparation';
+export { default as PlayBar } from './PlayBar/PlayBar';
+export { default as TopArtist } from './TopArtist/TopArtist';
+export { default as Discography } from './Discography/Discography';
